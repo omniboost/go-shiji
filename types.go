@@ -32,6 +32,12 @@ type CommunicationDetail struct {
 	Value                 string `json:"value"`
 }
 
+type CommunicationChannel struct {
+	IsPrimary bool   `json:"isPrimary"`
+	Details   string `json:"details"`
+	ModeCode  string `json:"modeCode"`
+}
+
 type ContactDetail struct {
 	Primary  bool   `json:"primary"`
 	Name     string `json:"name"`
@@ -126,4 +132,44 @@ type Property struct {
 	PurchaseElementQuotationCurrencies  []string `json:"purchaseElementQuotationCurrencies"`
 	MeetingAndEventsQuotationCurrencies []string `json:"meetingAndEventsQuotationCurrencies"`
 	FirstDayOfWeek                      string   `json:"firstDayOfWeek"`
+}
+
+type UserDetails struct {
+	ID                        string   `json:"id"`
+	AccountLoginProcedureType string   `json:"accountLoginProcedureType"`
+	ExternalID                string   `json:"externalId"`
+	Version                   int64    `json:"version"`
+	UserName                  string   `json:"userName"`
+	Email                     string   `json:"email"`
+	IsSystemUser              bool     `json:"isSystemUser"`
+	TenantID                  string   `json:"tenantId"`
+	ActiveFrom                DateTime `json:"activeFrom"`
+	ActiveTo                  DateTime `json:"activeTo"`
+	DeactivationComment       string   `json:"deactivationComment"`
+	BlockedTo                 DateTime `json:"blockedTo"`
+	LockoutTo                 DateTime `json:"lockoutTo"`
+	BlockComment              string   `json:"blockComment"`
+	PasswordChangeRequired    bool     `json:"passwordChangeRequired"`
+	PersonalData              struct {
+		FirstName      string `json:"firstName"`
+		LastName       string `json:"lastName"`
+		GenderCode     string `json:"genderCode"`
+		BirthDate      Date   `json:"birthDate"`
+		EmployeeNumber string `json:"employeeNumber"`
+		HireDate       Date   `json:"hireDate"`
+	} `json:"personalData"`
+
+	Address struct {
+		CountryCode  string `json:"countryCode"`
+		StateCode    string `json:"stateCode"`
+		City         string `json:"city"`
+		PostalCode   string `json:"postalCode"`
+		AddressLine1 string `json:"addressLine1"`
+		AddressLine2 string `json:"addressLine2"`
+	} `json:"address"`
+
+	CommunicationChannels         []CommunicationDetail `json:"communicationChannels"`
+	PasswordExpirationDisabled    bool                  `json:"passwordExpirationDisabled"`
+	AutomaticDeactivationDisabled bool                  `json:"automaticDeactivationDisabled"`
+	AuthenticatorRequired         bool                  `json:"authenticatorRequired"`
 }
