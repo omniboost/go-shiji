@@ -241,7 +241,7 @@ func (c *Client) Do(req *http.Request, responseBody interface{}) (*http.Response
 		return httpResp, err
 	}
 
-	if len(errorResponse.Messages) > 0 {
+	if errorResponse.Error() != "" {
 		return httpResp, errorResponse
 	}
 
@@ -369,11 +369,30 @@ type ErrorResponse struct {
 	// HTTP response that caused this error
 	Response *http.Response `json:"-"`
 
-	Messages []string `json:"messages"`
+	Code          string `json:"code"`
+	Message       string `json:"message"`
+	CorrelationID string `json:"correlationId"`
+	Details       []struct {
+		Code       string            `json:"code"`
+		Message    string            `json:"message"`
+		Parameters map[string]string `json:"parameters"`
+	} `json:"details"`
 }
 
 func (r *ErrorResponse) Error() string {
-	return strings.Join(r.Messages, ", ")
+	if r.Code != "" {
+		// Create message
+		message := fmt.Sprintf("%s: %s", r.Code, r.Message)
+
+		// Add every "details"
+		for _, detail := range r.Details {
+			message = fmt.Sprintf("%s\n * %s: %s", message, detail.Code, detail.Message)
+		}
+
+		return message
+	}
+
+	return ""
 }
 
 type Message struct {
