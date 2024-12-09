@@ -271,6 +271,19 @@ type SubsidiaryListItem struct {
 	DisplaySequence int32  `json:"displaySequence"`
 }
 
+type AccountGroup struct {
+	ID                             string            `json:"id"`
+	Version                        int64             `json:"version"`
+	ZoneID                         string            `json:"zoneId"`
+	Code                           string            `json:"code"`
+	Description                    []LocalizedString `json:"description"`
+	IsActive                       bool              `json:"isActive"`
+	DisplaySequence                int32             `json:"displaySequence"`
+	TypeCode                       string            `json:"typeCode"`
+	NumberCycleID                  string            `json:"numberCycleId"`
+	ExcludeFromZeroCheckOutDefault bool              `json:"excludeFromZeroCheckOutDefault"`
+}
+
 type UserDetails struct {
 	ID                        string   `json:"id"`
 	AccountLoginProcedureType string   `json:"accountLoginProcedureType"`
