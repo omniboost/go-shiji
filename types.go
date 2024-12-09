@@ -246,6 +246,31 @@ type TaxRule struct {
 	ChargeMethod                 string   `json:"chargeMethod"`
 }
 
+type SubsidiaryListItem struct {
+	ID              string `json:"id"`
+	Version         int64  `json:"version"`
+	Code            string `json:"code"`
+	Name            string `json:"name"`
+	ParentID        string `json:"parentId"`
+	ParentCode      string `json:"parentCode"`
+	Phone           string `json:"phone"`
+	Email           string `json:"email"`
+	BusinessAddress struct {
+		AddressLine1 string `json:"addressLine1"`
+		AddressLine2 string `json:"addressLine2"`
+		City         string `json:"city"`
+		PostalCode   string `json:"postalCode"`
+		StateCode    string `json:"stateCode"`
+		StateName    string `json:"stateName"`
+		CountryCode  string `json:"countryCode"`
+		CountryName  string `json:"countryName"`
+	} `json:"businessAddress"`
+
+	TaxID           string `json:"taxId"`
+	StatusCode      string `json:"statusCode"`
+	DisplaySequence int32  `json:"displaySequence"`
+}
+
 type UserDetails struct {
 	ID                        string   `json:"id"`
 	AccountLoginProcedureType string   `json:"accountLoginProcedureType"`
