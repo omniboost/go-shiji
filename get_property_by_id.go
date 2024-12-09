@@ -3,6 +3,8 @@ package shiji
 import (
 	"net/http"
 	"net/url"
+
+	"github.com/omniboost/go-shiji/utils"
 )
 
 func (c *Client) NewGetPropertyByIDRequest() GetPropertyByIDRequest {
@@ -40,7 +42,10 @@ type GetPropertyByIDQueryParams struct {
 }
 
 func (p GetPropertyByIDQueryParams) ToURLValues() (url.Values, error) {
-	encoder := newSchemaEncoder()
+	encoder := utils.NewSchemaEncoder()
+	encoder.RegisterEncoder(Date{}, utils.EncodeSchemaMarshaler)
+	encoder.RegisterEncoder(DateTime{}, utils.EncodeSchemaMarshaler)
+	encoder.RegisterEncoder(CommaSeparatedQueryParam{}, utils.EncodeSchemaMarshaler)
 	params := url.Values{}
 
 	err := encoder.Encode(p, params)
@@ -123,7 +128,7 @@ func (r *GetPropertyByIDRequest) Do() (GetPropertyByIDResponseBody, error) {
 	}
 
 	// Process query parameters
-	err = AddQueryParamsToRequest(r.QueryParams(), req, false)
+	err = utils.AddQueryParamsToRequest(r.QueryParams(), req, false)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}

@@ -75,6 +75,18 @@ func (d *DateTime) UnmarshalJSON(text []byte) (err error) {
 		return nil
 	}
 
+	// then try standard date with nanoseconds
+	d.Time, err = time.Parse(time.RFC3339Nano, value)
+	if err == nil {
+		return nil
+	}
+
+	// Then try without the timezone
+	d.Time, err = time.Parse("2006-01-02T15:04:05.999999999", value)
+	if err == nil {
+		return nil
+	}
+
 	d.Time, err = time.Parse("2006-01-02 15:04:05", value)
 	return err
 }
