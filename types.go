@@ -173,3 +173,14 @@ type UserDetails struct {
 	AutomaticDeactivationDisabled bool                  `json:"automaticDeactivationDisabled"`
 	AuthenticatorRequired         bool                  `json:"authenticatorRequired"`
 }
+
+type UnitAssignmentListItem struct {
+	UnitID          string `json:"unitId"`
+	ParentID        string `json:"parentId"`
+	Type            string `json:"type"`
+	Code            string `json:"code"`
+	Name            string `json:"name"`
+	IsPublished     bool   `json:"isPublished"`
+	RegionCode      string `json:"regionCode"`
+	DisplaySequence int32  `json:"displaySequence"`
+}
