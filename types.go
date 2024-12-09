@@ -191,6 +191,61 @@ type TransactionCode struct {
 	IsGuestLedgerPrepayment bool   `json:"isGuestLedgerPrepayment"`
 }
 
+type TaxRule struct {
+	ID                    string            `json:"id"`
+	Version               int64             `json:"version"`
+	ZoneID                string            `json:"zoneId"`
+	Code                  string            `json:"code"`
+	Description           []LocalizedString `json:"description"`
+	IsActive              bool              `json:"isActive"`
+	ForceToUse            bool              `json:"forceToUse"`
+	DisplaySequence       int32             `json:"displaySequence"`
+	IsCharge              bool              `json:"isCharge"`
+	Category              string            `json:"category"`
+	FlatAmount            float64           `json:"flatAmount"`
+	PercentageAmount      float64           `json:"percentageAmount"`
+	IsPercentage          bool              `json:"isPercentage"`
+	AmountDefinition      string            `json:"amountDefinition"`
+	AmountRangeDefinition struct {
+		RateType         string `json:"rateType"`
+		PriceType        string `json:"priceType"`
+		BaseAmountType   string `json:"baseAmountType"`
+		BaseAmountRanges []struct {
+			From                    float64 `json:"from"`
+			To                      float64 `json:"to"`
+			ValueRangeType          string  `json:"valueRangeType"`
+			Value                   float64 `json:"value"`
+			IsIncrementationDefined bool    `json:"isIncrementationDefined"`
+			IncrementationValue     float64 `json:"incrementationValue"`
+			ThresholdValue          float64 `json:"thresholdValue"`
+		} `json:"baseAmountRanges"`
+
+		IsPercentage bool `json:"isPercentage"`
+	} `json:"amountRangeDefinition"`
+
+	BaseRuleID                      string `json:"baseRuleId"`
+	IsBaseRule                      bool   `json:"isBaseRule"`
+	IsTaxIncluded                   bool   `json:"isTaxIncluded"`
+	PrintSeparately                 bool   `json:"printSeparately"`
+	PostSeparately                  bool   `json:"postSeparately"`
+	ChargeOnManualPosting           bool   `json:"chargeOnManualPosting"`
+	ChargeMethodPerPersonDefinition struct {
+		IsAdult    bool `json:"isAdult"`
+		IsChildren bool `json:"isChildren"`
+	} `json:"chargeMethodPerPersonDefinition"`
+
+	ValidFromDate                DateTime `json:"validFromDate"`
+	ValidToDate                  DateTime `json:"validToDate"`
+	TransactionCodeID            string   `json:"transactionCodeId"`
+	ApplicableTransactionCodeIDs []string `json:"applicableTransactionCodeIds"`
+	AgeBucketIDs                 []string `json:"ageBucketIds"`
+	LengthOfStay                 int32    `json:"lengthOfStay"`
+	IsCommission                 bool     `json:"isCommission"`
+	PurposeOfStayIDs             []string `json:"purposeOfStayIds"`
+	ExcludeDayUse                bool     `json:"excludeDayUse"`
+	ChargeMethod                 string   `json:"chargeMethod"`
+}
+
 type UserDetails struct {
 	ID                        string   `json:"id"`
 	AccountLoginProcedureType string   `json:"accountLoginProcedureType"`
