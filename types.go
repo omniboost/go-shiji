@@ -24,6 +24,11 @@ type AlternateName struct {
 	Name         string `json:"name"`
 }
 
+type LocalizedString struct {
+	LanguageCode string `json:"languageCode"`
+	Content      string `json:"content"`
+}
+
 type AddressDetail struct {
 	AddressLine1    string `json:"addressLine1"`
 	AddressLine2    string `json:"addressLine2"`
@@ -140,6 +145,50 @@ type Property struct {
 	PurchaseElementQuotationCurrencies  []string `json:"purchaseElementQuotationCurrencies"`
 	MeetingAndEventsQuotationCurrencies []string `json:"meetingAndEventsQuotationCurrencies"`
 	FirstDayOfWeek                      string   `json:"firstDayOfWeek"`
+}
+
+type TransactionCode struct {
+	ID                     string            `json:"id"`
+	Version                int64             `json:"version"`
+	ZoneID                 string            `json:"zoneId"`
+	Code                   string            `json:"code"`
+	Description            []LocalizedString `json:"description"`
+	IsActive               bool              `json:"isActive"`
+	ForceToUse             bool              `json:"forceToUse"`
+	DisplaySequence        int32             `json:"displaySequence"`
+	SubCode                string            `json:"subCode"`
+	CurrencyCode           string            `json:"currencyCode"`
+	AcceptAsCashierPayment bool              `json:"acceptAsCashierPayment"`
+	AllowToPostInAR        bool              `json:"allowToPostInAR"`
+	OnlinePaymentMethod    string            `json:"onlinePaymentMethod"`
+	AcceptAsDepositPayment bool              `json:"acceptAsDepositPayment"`
+	AllowManualPosting     bool              `json:"allowManualPosting"`
+	IsAdvancedDeposit      bool              `json:"isAdvancedDeposit"`
+	IsCheckNumberMandatory bool              `json:"isCheckNumberMandatory"`
+	PostingValueRange      struct {
+		From float64 `json:"from"`
+		To   float64 `json:"to"`
+	} `json:"postingValueRange"`
+
+	DefaultPostingValue      float64                `json:"defaultPostingValue"`
+	AdjustmentID             string                 `json:"adjustmentId"`
+	CustomFieldContainerJSON map[string]interface{} `json:"customFieldContainerJson"`
+	IsLocked                 bool                   `json:"isLocked"`
+	CreditCardSurcharge      struct {
+		Percentage        float64 `json:"percentage"`
+		TransactionCodeID string  `json:"transactionCodeId"`
+	} `json:"creditCardSurcharge"`
+
+	TransactionType         string `json:"transactionType"`
+	IsNonRevenue            bool   `json:"isNonRevenue"`
+	IsPostingAllowed        bool   `json:"isPostingAllowed"`
+	TransactionSubGroupID   string `json:"transactionSubGroupId"`
+	ParentTransactionCodeID string `json:"parentTransactionCodeId"`
+	PaymentTypeCode         string `json:"paymentTypeCode"`
+	CreditCardTypeCode      string `json:"creditCardTypeCode"`
+	HasSubCodes             bool   `json:"hasSubCodes"`
+	OfflinePaymentMethod    string `json:"offlinePaymentMethod"`
+	IsGuestLedgerPrepayment bool   `json:"isGuestLedgerPrepayment"`
 }
 
 type UserDetails struct {
