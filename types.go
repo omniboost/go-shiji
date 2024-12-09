@@ -11,7 +11,36 @@ type PaginatedResponse[T any] struct {
 
 type ConfigurationSupportedType string
 
-type Property struct {
+type AlternateName struct {
+	LanguageCode string `json:"languageCode"`
+	Name         string `json:"name"`
+}
+
+type AddressDetail struct {
+	AddressLine1    string `json:"addressLine1"`
+	AddressLine2    string `json:"addressLine2"`
+	City            string `json:"city"`
+	PostalCode      string `json:"postalCode"`
+	StateCode       string `json:"stateCode"`
+	CountryCode     string `json:"countryCode"`
+	AddressTypeCode string `json:"addressTypeCode"`
+}
+
+type CommunicationDetail struct {
+	Primary               bool   `json:"primary"`
+	CommunicationTypeCode string `json:"communicationTypeCode"`
+	Value                 string `json:"value"`
+}
+
+type ContactDetail struct {
+	Primary  bool   `json:"primary"`
+	Name     string `json:"name"`
+	Phone    string `json:"phone"`
+	Email    string `json:"email"`
+	JobTitle string `json:"jobTitle"`
+}
+
+type PropertyListItem struct {
 	ID              string `json:"id"`
 	Version         int64  `json:"version"`
 	Code            string `json:"code"`
@@ -38,4 +67,63 @@ type Property struct {
 	DisplaySequence int32                  `json:"displaySequence"`
 	RegionCode      string                 `json:"regionCode"`
 	BrandID         string                 `json:"brandId"`
+}
+
+type Property struct {
+	ID                     string                `json:"id"`
+	Version                int64                 `json:"version"`
+	Code                   string                `json:"code"`
+	Name                   string                `json:"name"`
+	ParentID               string                `json:"parentId"`
+	DefaultLanguageCode    string                `json:"defaultLanguageCode"`
+	TaxID                  string                `json:"taxId"`
+	LegalName              string                `json:"legalName"`
+	AlternateNames         []AlternateName       `json:"alternateNames"`
+	SupportedLanguageCodes []string              `json:"supportedLanguageCodes"`
+	AddressList            []AddressDetail       `json:"addressList"`
+	CommunicationDetails   []CommunicationDetail `json:"communicationDetails"`
+	Contacts               []ContactDetail       `json:"contacts"`
+	LegalOwner             string                `json:"legalOwner"`
+	Location               struct {
+		Latitude  float64 `json:"latitude"`
+		Longitude float64 `json:"longitude"`
+	} `json:"location"`
+	CheckInTime              string                 `json:"checkInTime"`
+	CheckOutTime             string                 `json:"checkOutTime"`
+	FutureOperationalWindow  int32                  `json:"futureOperationalWindow"`
+	AlternativePropertyCodes []string               `json:"alternativePropertyCodes"`
+	AlternativePropertyIDs   []string               `json:"alternativePropertyIds"`
+	CurrencyCode             string                 `json:"currencyCode"`
+	CustomCurrencyFormat     string                 `json:"customCurrencyFormat"`
+	ShortDataFormat          string                 `json:"shortDataFormat"`
+	LongDateFormat           string                 `json:"longDateFormat"`
+	TimeFormatCode           string                 `json:"timeFormatCode"`
+	TimeZoneCode             string                 `json:"timeZoneCode"`
+	StatusCode               string                 `json:"statusCode"`
+	FiscalReportingPeriodID  string                 `json:"fiscalReportingPeriodId"`
+	StarRating               float64                `json:"starRating"`
+	TypeID                   string                 `json:"typeId"`
+	BrandID                  string                 `json:"brandId"`
+	OperatingModelCode       string                 `json:"operatingModelCode"`
+	AttributeIDs             []string               `json:"attributeIds"`
+	DistributionChannelIDs   []string               `json:"distributionChannelIds"`
+	CustomFields             map[string]interface{} `json:"customFields"`
+	ProfileStore             struct {
+		PrimaryID string   `json:"primaryId"`
+		OtherIDs  []string `json:"otherIds"`
+	} `json:"profileStore"`
+
+	EffectiveZoneIDs    []string `json:"effectiveZoneIds"`
+	DisplaySequence     int32    `json:"displaySequence"`
+	RegionCode          string   `json:"regionCode"`
+	InventoryAllocation struct {
+		StartTime string `json:"startTime"`
+		EndTIme   string `json:"endTime"`
+	} `json:"inventoryAllocation"`
+
+	SupportedQuotationCurrencies        []string `json:"supportedQuotationCurrencies"`
+	RatePlanQuotationCurrencies         []string `json:"ratePlanQuotationCurrencies"`
+	PurchaseElementQuotationCurrencies  []string `json:"purchaseElementQuotationCurrencies"`
+	MeetingAndEventsQuotationCurrencies []string `json:"meetingAndEventsQuotationCurrencies"`
+	FirstDayOfWeek                      string   `json:"firstDayOfWeek"`
 }

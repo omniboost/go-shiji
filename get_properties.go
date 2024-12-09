@@ -105,7 +105,7 @@ func (r *GetPropertiesRequest) NewResponseBody() *GetPropertiesResponseBody {
 	return &GetPropertiesResponseBody{}
 }
 
-type GetPropertiesResponseBody PaginatedResponse[Property]
+type GetPropertiesResponseBody PaginatedResponse[PropertyListItem]
 
 func (r *GetPropertiesRequest) URL() *url.URL {
 	u := r.client.GetEndpointURL("api-gateway/configuration/v1/properties", r.PathParams())
@@ -130,8 +130,8 @@ func (r *GetPropertiesRequest) Do() (GetPropertiesResponseBody, error) {
 	return *responseBody, err
 }
 
-func (r *GetPropertiesRequest) All() ([]Property, error) {
-	properties := []Property{}
+func (r *GetPropertiesRequest) All() ([]PropertyListItem, error) {
+	properties := []PropertyListItem{}
 	for {
 		resp, err := r.Do()
 		if err != nil {
