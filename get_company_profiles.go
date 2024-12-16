@@ -121,7 +121,7 @@ func (r *GetCompanyProfilesRequest) NewResponseBody() *GetCompanyProfilesRespons
 	return &GetCompanyProfilesResponseBody{}
 }
 
-type GetCompanyProfilesResponseBody PaginatedResponse[CompanyProfileResponse]
+type GetCompanyProfilesResponseBody PaginatedResponse[CompanyProfile]
 
 func (r *GetCompanyProfilesRequest) URL() *url.URL {
 	u := r.client.GetEndpointURL("api-gateway/profiles/v1/company", r.PathParams())
@@ -149,8 +149,8 @@ func (r *GetCompanyProfilesRequest) Do() (GetCompanyProfilesResponseBody, error)
 	return *responseBody, err
 }
 
-func (r *GetCompanyProfilesRequest) All() ([]CompanyProfileResponse, error) {
-	companies := []CompanyProfileResponse{}
+func (r *GetCompanyProfilesRequest) All() ([]CompanyProfile, error) {
+	companies := []CompanyProfile{}
 	for {
 		resp, err := r.Do()
 		if err != nil {
