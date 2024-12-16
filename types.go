@@ -300,6 +300,21 @@ type TransactionGroup struct {
 	TransactionType string `json:"transactionType"`
 }
 
+type TransactionSubGroup struct {
+	ID          string `json:"id"`
+	Code        string `json:"code"`
+	ZoneID      string `json:"zoneId"`
+	Version     int64  `json:"version"`
+	IsActive    bool   `json:"isActive"`
+	ForceToUse  bool   `json:"forceToUse"`
+	Description []struct {
+		Content      string `json:"content"`
+		LanguageCode string `json:"languageCode"`
+	} `json:"description"`
+	DisplaySequence    int32  `json:"displaySequence"`
+	TransactionGroupID string `json:"transactionGroupId"`
+}
+
 type UserDetails struct {
 	ID                        string   `json:"id"`
 	AccountLoginProcedureType string   `json:"accountLoginProcedureType"`
