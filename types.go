@@ -348,6 +348,12 @@ type ContactProfileResponse struct {
 	} `json:"contactProfileAvailabilityDetails"`
 }
 
+type CodeIDValue struct {
+	ID          string `json:"id"`
+	Code        string `json:"code"`
+	Description string `json:"description"`
+}
+
 type LocalizedIDCodeValue struct {
 	ID           string `json:"id"`
 	Code         string `json:"code"`
@@ -817,6 +823,110 @@ type IndividualProfile struct {
 			ExpiryDate Date `json:"expiryDate"`
 		} `json:"internal"`
 	} `json:"membershipDetails"`
+
+	ExternalAccountReceivable struct {
+		ExternalAccountReceivableNumber string `json:"externalAccountReceivableNumber"`
+	} `json:"externalAccountReceivable"`
+
+	HasImage bool `json:"hasImage"`
+}
+
+type TravelAgentProfile struct {
+	ID       string `json:"id"`
+	Version  string `json:"version"`
+	TypeCode struct {
+		ID          string `json:"id"`
+		Code        string `json:"code"`
+		Description string `json:"description"`
+	} `json:"typeCode"`
+
+	Status struct {
+		IsActive               bool `json:"isActive"`
+		DeactivationReasonCode struct {
+			ID          string `json:"id"`
+			Code        string `json:"code"`
+			Description string `json:"description"`
+		} `json:"deactivationReasonCode"`
+
+		IsRestricted          bool `json:"isRestricted"`
+		RestrictionReasonCode struct {
+			ID          string `json:"id"`
+			Code        string `json:"code"`
+			Description string `json:"description"`
+		} `json:"restrictionReasonCode"`
+
+		RestrictionComment string `json:"restrictionComment"`
+		IsLocked           bool   `json:"isLocked"`
+		LockedReason       string `json:"lockedReason"`
+		ForReview          bool   `json:"forReview"`
+	} `json:"status"`
+
+	LinkedProfileCount int32 `json:"linkedProfileCount"`
+	LinkedProfileIDs   []struct {
+		ProfileRoleCode string `json:"profileRoleCode"`
+		ProfileID       string `json:"profileId"`
+	} `json:"linkedProfileIds"`
+
+	Details struct {
+		Description                     string        `json:"description"`
+		FullName                        string        `json:"fullName"`
+		Abbreviation                    string        `json:"abbreviation"`
+		IATA                            string        `json:"iata"`
+		TaxID                           string        `json:"taxId"`
+		BusinessSegmentation            []CodeIDValue `json:"businessSegmentation"`
+		PreferredLanguageProfileDetails struct {
+			LanguageCode struct {
+				Code        string `json:"code"`
+				Description string `json:"description"`
+			} `json:"languageCode"`
+
+			FullName string `json:"fullName"`
+		} `json:"preferredLanguageProfileDetails"`
+
+		PreferredCommunicationLanguageCode struct {
+			Code        string `json:"code"`
+			Description string `json:"description"`
+		} `json:"preferredCommunicationLanguageCode"`
+	} `json:"details"`
+
+	Addresses             []ProfileAddress              `json:"addresses"`
+	CommunicationChannels []ProfileCommunicationChannel `json:"communicationChannels"`
+	Metadata              ProfileMetadata               `json:"metadata"`
+	NotDuplicateProfiles  struct {
+		Collection []struct {
+			NotDuplicateProfileID string `json:"notDuplicateProfileId"`
+			ProfileID             string `json:"profileId"`
+			ProfileRoleCode       string `json:"profileRoleCode"`
+		}
+
+		Count int32 `json:"count"`
+	} `json:"notDuplicateProfiles"`
+
+	FreezeStatus struct {
+		IsFrozen   bool   `json:"isFrozen"`
+		Reason     string `json:"reason"`
+		PropertyID string `json:"propertyId"`
+		Source     string `json:"source"`
+	} `json:"freezeStatus"`
+
+	CustomFieldContainerJSON  string                       `json:"customFieldContainerJson"`
+	ExternalSystemIdentifiers []ProfilesExternalIdentifier `json:"externalSystemIdentifiers"`
+	NotesIdentifiers          []string                     `json:"notesIdentifiers"`
+	ContactProfiles           []ContactProfileResponse     `json:"contactProfiles"`
+	ContactFor                []ContactProfileResponse     `json:"contactFor"`
+	ProfileOwners             struct {
+		Primary struct {
+			ID string `json:"id"`
+		} `json:"primary"`
+
+		Others []struct {
+			ID string `json:"id"`
+		} `json:"others"`
+	} `json:"profileOwners"`
+
+	RelationshipDetails struct {
+		IsRoot bool `json:"isRoot"`
+	} `json:"relationshipDetails"`
 
 	ExternalAccountReceivable struct {
 		ExternalAccountReceivableNumber string `json:"externalAccountReceivableNumber"`
