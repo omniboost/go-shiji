@@ -10,6 +10,10 @@ type Date struct {
 	time.Time
 }
 
+func (d Date) MarshalSchema() string {
+	return d.Format("2006-01-02")
+}
+
 func (d Date) MarshalJSON() ([]byte, error) {
 	return json.Marshal(d.Format("2006-01-02"))
 }

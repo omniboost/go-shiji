@@ -526,3 +526,81 @@ type CompanyProfileResponse struct {
 
 	HasImage bool `json:"hasImage"`
 }
+
+type Transaction struct {
+	ID      string `json:"id"`
+	Account struct {
+		ID     string `json:"id"`
+		Number string `json:"number"`
+	} `json:"account"`
+
+	OriginAccount struct {
+		ID     string `json:"id"`
+		Number string `json:"number"`
+	} `json:"originAccount"`
+
+	Version             int64    `json:"version"`
+	TransactionDate     Date     `json:"transactionDate"`
+	TransactionDateTime DateTime `json:"transactionDateTime"`
+	BusinessDate        Date     `json:"businessDate"`
+	RevenueDate         Date     `json:"revenueDate"`
+	UpdatedAt           DateTime `json:"updatedAt"`
+	User                struct {
+		ID   string `json:"id"`
+		Name string `json:"name"`
+	} `json:"user"`
+
+	Cashier struct {
+		ID   string `json:"id"`
+		Name string `json:"name"`
+	} `json:"cashier"`
+
+	Comment      string `json:"comment"`
+	PostingGroup struct {
+		ID          string `json:"id"`
+		Description string `json:"description"`
+	} `json:"postingGroup"`
+
+	PaymentMethod string `json:"paymentMethod"`
+	FolioWindow   struct {
+		ID        string `json:"id"`
+		Number    int    `json:"number"`
+		ProfileID string `json:"profileId"`
+	} `json:"folioWindow"`
+
+	InvoiceNumber   string `json:"invoiceNumber"`
+	TransactionType string `json:"transactionType"`
+	LedgerType      string `json:"ledgerType"`
+	TransactionCode struct {
+		ID          string `json:"id"`
+		Code        string `json:"code"`
+		Description string `json:"description"`
+	} `json:"transactionCode"`
+
+	TransactionGroup struct {
+		ID          string `json:"id"`
+		Code        string `json:"code"`
+		Description string `json:"description"`
+	} `json:"transactionGroup"`
+
+	TransactionSubGroup struct {
+		ID          string `json:"id"`
+		Code        string `json:"code"`
+		Description string `json:"description"`
+	} `json:"transactionSubGroup"`
+
+	NetAmount      float64 `json:"netAmount"`
+	GrossAmount    float64 `json:"grossAmount"`
+	TaxAmount      float64 `json:"taxAmount"`
+	PaymentAmount  float64 `json:"paymentAmount"`
+	NetUnitPrice   float64 `json:"netUnitPrice"`
+	GrossUnitPrice float64 `json:"grossUnitPrice"`
+	Quantity       float64 `json:"quantity"`
+	Currency       string  `json:"currency"`
+	Metadata       struct {
+		CreatedAt string `json:"createdAt"`
+		UpdatedAt string `json:"updatedAt"`
+	} `json:"metaData"`
+}
+
+type Transactions []Transaction
