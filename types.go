@@ -578,6 +578,234 @@ type CompanyProfile struct {
 }
 
 type IndividualProfile struct {
+	ID       string `json:"id"`
+	Version  string `json:"version"`
+	TypeCode struct {
+		ID          string `json:"id"`
+		Code        string `json:"code"`
+		Description string `json:"description"`
+	} `json:"typeCode"`
+
+	Status struct {
+		IsActive               bool `json:"isActive"`
+		DeactivationReasonCode struct {
+			ID          string `json:"id"`
+			Code        string `json:"code"`
+			Description string `json:"description"`
+		} `json:"deactivationReasonCode"`
+
+		IsRestricted          bool `json:"isRestricted"`
+		RestrictionReasonCode struct {
+			ID          string `json:"id"`
+			Code        string `json:"code"`
+			Description string `json:"description"`
+		} `json:"restrictionReasonCode"`
+
+		RestrictionComment string `json:"restrictionComment"`
+		IsLocked           bool   `json:"isLocked"`
+		LockedReason       string `json:"lockedReason"`
+		ForReview          bool   `json:"forReview"`
+	} `json:"status"`
+
+	Details struct {
+		TitleCode       LocalizedIDCodeValue `json:"titleCode"`
+		FirstName       string               `json:"firstName"`
+		LastName        string               `json:"lastName"`
+		NationalityCode struct {
+			Code         string `json:"code"`
+			LanguageCode string `json:"languageCode"`
+			Description  string `json:"description"`
+		} `json:"nationalityCode"`
+
+		Greeting string `json:"greeting"`
+		VIPCode  struct {
+			Color        string `json:"color"`
+			ID           string `json:"id"`
+			Code         string `json:"code"`
+			LanguageCode string `json:"languageCode"`
+			Description  string `json:"description"`
+		} `json:"vipCode"`
+
+		GenderCode struct {
+			Code        string `json:"code"`
+			Description string `json:"description"`
+		} `json:"genderCode"`
+
+		BirthdayAnniversaryDate struct {
+			Month int32 `json:"month"`
+			Day   int32 `json:"day"`
+			Year  int32 `json:"year"`
+		} `json:"birthdayAnniversaryDate"`
+
+		PreferredLanguageProfileDetails struct {
+			LanguageCode struct {
+				Code         string `json:"code"`
+				LanguageCode string `json:"languageCode"`
+				Description  string `json:"description"`
+			} `json:"languageCode"`
+
+			LocalizedIndividualProfileDetails struct {
+				Title     string `json:"title"`
+				FirstName string `json:"firstName"`
+				LastName  string `json:"lastName"`
+				Greeting  string `json:"greeting"`
+			} `json:"localizedIndividualProfileDetails"`
+		} `json:"preferredLanguageProfileDetails"`
+
+		Anniversaries []struct {
+			Date struct {
+				Month int32 `json:"month"`
+				Day   int32 `json:"day"`
+				Year  int32 `json:"year"`
+			} `json:"date"`
+
+			Description string `json:"description"`
+		} `json:"anniversaries"`
+
+		CompanyName                        string               `json:"companyName"`
+		PositionName                       string               `json:"positionName"`
+		MiddleName                         string               `json:"middleName"`
+		Suffix                             LocalizedIDCodeValue `json:"suffix"`
+		PreferredCommunicationLanguageCode struct {
+			Code         string `json:"code"`
+			LanguageCode string `json:"languageCode"`
+			Description  string `json:"description"`
+		} `json:"preferredCommunicationLanguageCode"`
+
+		HonoraryTitle LocalizedIDCodeValue `json:"honoraryTitle"`
+
+		TaxID           string `json:"taxId"`
+		AdditionalNames []struct {
+			Type  string `json:"type"`
+			Value string `json:"value"`
+		} `json:"additionalNames"`
+	} `json:"details"`
+
+	Addresses             []ProfileAddress              `json:"addresses"`
+	CommunicationChannels []ProfileCommunicationChannel `json:"communicationChannels"`
+	DisabilityCodes       []LocalizedIDCodeValue        `json:"disabilityCodes"`
+	TaxExemption          struct {
+		Code    LocalizedIDCodeValue `json:"code"`
+		Comment string               `json:"comment"`
+	} `json:"taxExemption"`
+
+	Memberships []struct {
+		ID         string               `json:"id"`
+		IsActive   bool                 `json:"isActive"`
+		LevelCode  LocalizedIDCodeValue `json:"levelCode"`
+		TypeCode   LocalizedIDCodeValue `json:"typeCode"`
+		Number     string               `json:"number"`
+		SinceDate  Date                 `json:"sinceDate"`
+		ExpiryDate Date                 `json:"expiryDate"`
+	} `json:"memberships"`
+
+	Documents []struct {
+		ID               string      `json:"id"`
+		ParentVersion    string      `json:"parentVersion"`
+		TypeCode         CodeIDValue `json:"typeCode"`
+		Number           string      `json:"number"`
+		ExpiryDate       Date        `json:"expiryDate"`
+		IssueDate        Date        `json:"issueDate"`
+		IssueCountryCode struct {
+			Code        string `json:"code"`
+			Description string `json:"description"`
+		} `json:"issueCountryCode"`
+
+		BirthCountryCode struct {
+			Code        string `json:"code"`
+			Description string `json:"description"`
+		} `json:"birthCountryCode"`
+
+		BirthDate       Date   `json:"birthDate"`
+		BirthPlace      string `json:"birthPlace"`
+		NationalityCode struct {
+			Code        string `json:"code"`
+			Description string `json:"description"`
+		} `json:"nationalityCode"`
+
+		AdditionalInfo string `json:"additionalInfo"`
+	} `json:"documents"`
+
+	Metadata             ProfileMetadata `json:"metadata"`
+	NotDuplicateProfiles struct {
+		Collection []struct {
+			NotDuplicateProfileID string `json:"notDuplicateProfileId"`
+			ProfileID             string `json:"profileId"`
+			ProfileRoleCode       string `json:"profileRoleCode"`
+		} `json:"collection"`
+
+		Count int32 `json:"count"`
+	} `json:"notDuplicateProfiles"`
+
+	FreezeStatus struct {
+		IsFrozen   bool   `json:"isFrozen"`
+		Reason     string `json:"reason"`
+		PropertyID string `json:"propertyId"`
+		Source     string `json:"source"`
+	} `json:"freezeStatus"`
+
+	Consents []struct {
+		ConsentID   string          `json:"consentId"`
+		IsGranted   bool            `json:"isGranted"`
+		GrantedAt   DateTime        `json:"grantedAt"`
+		ConsentType string          `json:"consentType"`
+		Source      string          `json:"source"`
+		Metadata    ProfileMetadata `json:"metadata"`
+		ExpiryDate  Date            `json:"expiryDate"`
+	} `json:"consents"`
+
+	CustomFieldContainerJSON    string                       `json:"customFieldContainerJson"`
+	CustomPiiFieldContainerJSON string                       `json:"customPiiFieldContainerJson"`
+	ExternalSystemIdentifiers   []ProfilesExternalIdentifier `json:"externalSystemIdentifiers"`
+	NotesIdentifiers            []string                     `json:"notesIdentifiers"`
+	LinkedProfileCount          int32                        `json:"linkedProfileCount"`
+	LinkedProfileIDs            []struct {
+		ProfileRoleCode string `json:"profileRoleCode"`
+		ProfileID       string `json:"profileId"`
+	} `json:"linkedProfileIds"`
+
+	GroupStatus struct {
+		IsGrouped  bool   `json:"isGrouped"`
+		GroupID    string `json:"groupId"`
+		PropertyID string `json:"propertyId"`
+		Code       string `json:"code"`
+		Name       string `json:"name"`
+	} `json:"groupStatus"`
+
+	ContactProfiles  []ContactProfileResponse `json:"contactProfiles"`
+	ContactFor       []ContactProfileResponse `json:"contactFor"`
+	IsIncognito      bool                     `json:"isIncognito"`
+	IncognitoDetails struct {
+		FirstName string `json:"firstName"`
+		LastName  string `json:"lastName"`
+	} `json:"incognitoDetails"`
+
+	ProfileOwners struct {
+		Primary struct {
+			ID string `json:"id"`
+		} `json:"primary"`
+
+		Others []struct {
+			ID string `json:"id"`
+		} `json:"others"`
+	} `json:"profileOwners"`
+
+	Preferences []struct {
+		ID               string               `json:"id"`
+		PreferenceCode   LocalizedIDCodeValue `json:"preferenceCode"`
+		IsPreferred      bool                 `json:"isPreferred"`
+		IsGlobal         bool                 `json:"isGlobal"`
+		OriginPropertyID string               `json:"originPropertyId"`
+		IsRequired       bool                 `json:"isRequired"`
+		Weight           int32                `json:"weight"`
+	} `json:"preferences"`
+
+	ExternalAccountReceivable struct {
+		ExternalAccountReceivableNumber string `json:"externalAccountReceivableNumber"`
+	} `json:"externalAccountReceivable"`
+}
+
+type IndividualProfileV2 struct {
 	ID       string               `json:"id"`
 	TypeCode LocalizedIDCodeValue `json:"typeCode"`
 
