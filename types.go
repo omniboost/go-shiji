@@ -1309,3 +1309,98 @@ type Transaction struct {
 }
 
 type Transactions []Transaction
+
+type CashieringAccount struct {
+	ID                    string `json:"id"`
+	Version               int64  `json:"version"`
+	AccountNumber         string `json:"accountNumber"`
+	ExternalAccountNumber string `json:"externalAccountNumber"`
+	AccountGroupCode      struct {
+		Code        string `json:"code"`
+		Description string `json:"description"`
+	} `json:"accountGroupCode"`
+
+	ProfileID         string   `json:"profileId"`
+	ProfileRoleCode   string   `json:"profileRoleCode"`
+	ValidFromDate     DateTime `json:"validFromDate"`
+	ValidTODate       string   `json:"validToDate"`
+	AccountStatusCode struct {
+		Code        string `json:"code"`
+		Description string `json:"description"`
+	} `json:"accountStatusCode"`
+
+	ReservationStatusCode struct {
+		Code        string `json:"code"`
+		Description string `json:"description"`
+	} `json:"reservationStatusCode"`
+
+	CreditLimit float64 `json:"creditLimit"`
+	Nickname    string  `json:"nickname"`
+	NoPost      bool    `json:"noPost"`
+	NetBalance  struct {
+		Amount   float64 `json:"amount"`
+		Currency string  `json:"currency"`
+	} `json:"netBalance"`
+
+	GrossBalance struct {
+		Amount   float64 `json:"amount"`
+		Currency string  `json:"currency"`
+	} `json:"grossBalance"`
+
+	OriginatorRole string   `json:"originatorRole"`
+	OriginatorID   string   `json:"originatorId"`
+	MembershipIDs  []string `json:"membershipIds"`
+	ChannelCode    struct {
+		Code        string `json:"code"`
+		Description string `json:"description"`
+	} `json:"channelCode"`
+
+	SourceCode struct {
+		Code        string `json:"code"`
+		Description string `json:"description"`
+	} `json:"sourceCode"`
+
+	MarketSegmentCode struct {
+		Code        string `json:"code"`
+		Description string `json:"description"`
+	} `json:"marketSegmentCode"`
+
+	LinkedProfilesV2 []struct {
+		ProfileID         string `json:"profileId"`
+		ProfileRole       string `json:"profileRole"`
+		IsPrimary         bool   `json:"isPrimary"`
+		TaxExemptReasonID string `json:"taxExemptReasonId"`
+	} `json:"linkedProfilesV2"`
+
+	OutstandingPrepaidCommission struct {
+		Amount   float64 `json:"amount"`
+		Currency string  `json:"currency"`
+	} `json:"outstandingPrepaidCommission"`
+
+	ContactProfiles map[string][]struct {
+		ID        string   `json:"id"`
+		Roles     []string `json:"roles"`
+		IsPrimary bool     `json:"isPrimary"`
+	} `json:"contactProfiles"`
+
+	IsExcludedFromZeroCheckOut bool `json:"isExcludedFromZeroCheckOut"`
+	AllowSkipInvoiceGeneration bool `json:"allowSkipInvoiceGeneration"`
+
+	ReservationGroup struct {
+		ID   string `json:"id"`
+		Code string `json:"code"`
+	} `json:"reservationGroup"`
+
+	MultiReservationLinks []struct {
+		ID         string `json:"id"`
+		Name       string `json:"name"`
+		Identifier string `json:"identifier"`
+	} `json:"multiReservationLinks"`
+
+	MeetingAndEvents struct {
+		BookingCode        string `json:"bookingCode"`
+		BookingChannelCode string `json:"bookingChannelCode"`
+	} `json:"meetingAndEvents"`
+
+	ItineraryID string `json:"itineraryId"`
+}
