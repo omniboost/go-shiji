@@ -1876,8 +1876,8 @@ type ExternalSystem struct {
 	} `json:"name,omitempty"`
 	ZoneID      string `json:"zoneId,omitempty"`
 	Version     int64  `json:"version,omitempty"`
-	IsActive    bool   `json:"isActive,omitempty"`
-	ForceToUse  bool   `json:"forceToUse,omitempty"`
+	IsActive    bool   `json:"isActive"`
+	ForceToUse  bool   `json:"forceToUse"`
 	Description []struct {
 		Content      string `json:"content,omitempty"`
 		LanguageCode string `json:"languageCode,omitempty"`
