@@ -1649,7 +1649,7 @@ type CreateIndividualV1 struct {
 }
 
 type PatchIndividual struct {
-	Details struct {
+	Details *struct {
 		TitleID         string `json:"titleId,omitempty"`
 		FirstName       string `json:"firstName,omitempty"`
 		LastName        string `json:"lastName,omitempty"`
