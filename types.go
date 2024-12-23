@@ -1866,3 +1866,21 @@ type PatchIndividual struct {
 		} `json:"reasons,omitempty"`
 	} `json:"taxExemptDetails,omitempty"`
 }
+
+type ExternalSystem struct {
+	ID   string `json:"id,omitempty"`
+	Code string `json:"code,omitempty"`
+	Name []struct {
+		Content      string `json:"content,omitempty"`
+		LanguageCode string `json:"languageCode,omitempty"`
+	} `json:"name,omitempty"`
+	ZoneID      string `json:"zoneId,omitempty"`
+	Version     int64  `json:"version,omitempty"`
+	IsActive    bool   `json:"isActive,omitempty"`
+	ForceToUse  bool   `json:"forceToUse,omitempty"`
+	Description []struct {
+		Content      string `json:"content,omitempty"`
+		LanguageCode string `json:"languageCode,omitempty"`
+	} `json:"description,omitempty"`
+	DisplaySequence int32 `json:"displaySequence,omitempty"`
+}
