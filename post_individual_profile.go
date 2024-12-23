@@ -8,14 +8,17 @@ import (
 )
 
 func (c *Client) NewPostIndividualProfileRequest() PostIndividualProfileRequest {
-	return PostIndividualProfileRequest{
-		client:      c,
-		queryParams: c.NewPostIndividualProfileQueryParams(),
-		pathParams:  c.NewPostIndividualProfilePathParams(),
-		method:      http.MethodPost,
-		headers:     c.NewPostIndividualProfileHeaders(),
-		requestBody: c.NewPostIndividualProfileRequestBody(),
+	r := PostIndividualProfileRequest{
+		client: c,
+		method: http.MethodPost,
 	}
+
+	r.headers = r.NewHeaders()
+	r.queryParams = r.NewQueryParams()
+	r.pathParams = r.NewPathParams()
+	r.requestBody = r.NewRequestBody()
+
+	return r
 }
 
 type PostIndividualProfileRequest struct {
@@ -27,7 +30,7 @@ type PostIndividualProfileRequest struct {
 	requestBody PostIndividualProfileRequestBody
 }
 
-func (c *Client) NewPostIndividualProfileQueryParams() *PostIndividualProfileQueryParams {
+func (r PostIndividualProfileRequest) NewQueryParams() *PostIndividualProfileQueryParams {
 	return &PostIndividualProfileQueryParams{}
 }
 
@@ -52,7 +55,7 @@ func (r *PostIndividualProfileRequest) QueryParams() *PostIndividualProfileQuery
 	return r.queryParams
 }
 
-func (c *Client) NewPostIndividualProfileHeaders() *PostIndividualProfileHeaders {
+func (r PostIndividualProfileRequest) NewHeaders() *PostIndividualProfileHeaders {
 	return &PostIndividualProfileHeaders{}
 }
 
@@ -64,12 +67,11 @@ func (r *PostIndividualProfileRequest) Headers() *PostIndividualProfileHeaders {
 	return r.headers
 }
 
-func (c *Client) NewPostIndividualProfilePathParams() *PostIndividualProfilePathParams {
+func (r PostIndividualProfileRequest) NewPathParams() *PostIndividualProfilePathParams {
 	return &PostIndividualProfilePathParams{}
 }
 
-type PostIndividualProfilePathParams struct {
-}
+type PostIndividualProfilePathParams struct{}
 
 func (p *PostIndividualProfilePathParams) Params() map[string]string {
 	return map[string]string{}
@@ -91,19 +93,18 @@ func (r *PostIndividualProfileRequest) Method() string {
 	return r.method
 }
 
-func (s *Client) NewPostIndividualProfileRequestBody() PostIndividualProfileRequestBody {
+func (r PostIndividualProfileRequest) NewRequestBody() PostIndividualProfileRequestBody {
 	return PostIndividualProfileRequestBody{}
 }
 
-type PostIndividualProfileRequestBody struct {
-}
+type PostIndividualProfileRequestBody CreateIndividualV1
 
 func (r *PostIndividualProfileRequest) RequestBody() *PostIndividualProfileRequestBody {
-	return nil
+	return &r.requestBody
 }
 
 func (r *PostIndividualProfileRequest) RequestBodyInterface() interface{} {
-	return nil
+	return r.requestBody
 }
 
 func (r *PostIndividualProfileRequest) SetRequestBody(body PostIndividualProfileRequestBody) {
@@ -114,7 +115,7 @@ func (r *PostIndividualProfileRequest) NewResponseBody() *PostIndividualProfileR
 	return &PostIndividualProfileResponseBody{}
 }
 
-type PostIndividualProfileResponseBody CreateIndividualV1
+type PostIndividualProfileResponseBody struct{}
 
 func (r *PostIndividualProfileRequest) URL() *url.URL {
 	u := r.client.GetEndpointURL("api-gateway/profiles/v1/individual", r.PathParams())

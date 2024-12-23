@@ -12,8 +12,11 @@ func TestPostIndividualProfile(t *testing.T) {
 	client := client()
 
 	req := client.NewPostIndividualProfileRequest()
-	req.Headers().PropertyID = "c6a95ecb-be35-4619-875b-cae5d0df5fd2"
+	req.Headers().PropertyID = "806c52a0-753d-4a03-a4ad-0d5b577a11dc"
+	body := req.NewRequestBody()
+	body.Details.FirstName = "Emma"
 
+	req.SetRequestBody(body)
 	resp, err := req.Do()
 	if err != nil {
 		t.Error(err)
