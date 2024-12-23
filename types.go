@@ -1884,3 +1884,15 @@ type ExternalSystem struct {
 	} `json:"description,omitempty"`
 	DisplaySequence int32 `json:"displaySequence,omitempty"`
 }
+
+type Zone struct {
+	ID                 string   `json:"id"`
+	Version            int64    `json:"version"`
+	OwningPropertyID   string   `json:"owningPropertyId"`
+	OwningSubsidiaryID string   `json:"owningSubsidiaryId"`
+	TypeCode           string   `json:"typeCode"`
+	Name               string   `json:"name"`
+	Description        string   `json:"description"`
+	StatusCode         string   `json:"statusCode"`
+	EntityTypeCodes    []string `json:"entityTypeCodes"`
+}
