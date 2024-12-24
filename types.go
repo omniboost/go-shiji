@@ -2331,10 +2331,10 @@ type FolioItem struct {
 	IsLocked                                       bool     `json:"isLocked,omitempty"`
 	IsInvoiceGenerated                             bool     `json:"isInvoiceGenerated,omitempty"`
 	IsInvoiceCorrectionFinishedSuccessfully        string   `json:"isInvoiceCorrectionFinishedSuccessfully,omitempty"`
-	IsInvoiceGenerationFinishedSuccessfully        string   `json:"isInvoiceGenerationFinishedSuccessfully,omitempty"`
-	IsAdvanceDepositCorrectionFinishedSuccessfully string   `json:"isAdvanceDepositCorrectionFinishedSuccessfully,omitempty"`
-	IsPostDirectlyInArFinishedSuccessfully         string   `json:"isPostDirectlyInArFinishedSuccessfully,omitempty"`
-	IsOriginalInvoiceProvided                      string   `json:"isOriginalInvoiceProvided,omitempty"`
+	IsInvoiceGenerationFinishedSuccessfully        bool     `json:"isInvoiceGenerationFinishedSuccessfully,omitempty"`
+	IsAdvanceDepositCorrectionFinishedSuccessfully bool     `json:"isAdvanceDepositCorrectionFinishedSuccessfully,omitempty"`
+	IsPostDirectlyInArFinishedSuccessfully         bool     `json:"isPostDirectlyInArFinishedSuccessfully,omitempty"`
+	IsOriginalInvoiceProvided                      bool     `json:"isOriginalInvoiceProvided,omitempty"`
 	IsInternalCorrection                           bool     `json:"isInternalCorrection,omitempty"`
 	FolioConstraintsItem                           struct {
 		ID           string `json:"id,omitempty"`
@@ -2347,8 +2347,166 @@ type FolioItem struct {
 		AllowedPaymentTypes        []string `json:"allowedPaymentTypes,omitempty"`
 	} `json:"folioConstrainsItem,omitempty"`
 
-	IsTaxExemptionApplied                                 bool   `json:"isTaxExemptionApplied,omitempty"`
-	IsCheckedOutWithoutInvoiceGeneration                  string `json:"isCheckedOutWithoutInvoiceGeneration,omitempty"`
-	IsGuestLedgerPrepaymentCreationFinishedSuccessfully   string `json:"isGuestLedgerPrepaymentCreationFinishedSuccessfully,omitempty"`
-	IsGuestLedgerPrepaymentCorrectionFinishedSuccessfully string `json:"isGuestLedgerPrepaymentCorrectionFinishedSuccessfully,omitempty"`
+	IsTaxExemptionApplied                                 bool `json:"isTaxExemptionApplied,omitempty"`
+	IsCheckedOutWithoutInvoiceGeneration                  bool `json:"isCheckedOutWithoutInvoiceGeneration,omitempty"`
+	IsGuestLedgerPrepaymentCreationFinishedSuccessfully   bool `json:"isGuestLedgerPrepaymentCreationFinishedSuccessfully,omitempty"`
+	IsGuestLedgerPrepaymentCorrectionFinishedSuccessfully bool `json:"isGuestLedgerPrepaymentCorrectionFinishedSuccessfully,omitempty"`
+}
+
+type FolioInternalTransaction struct {
+	ID           string `json:"id,omitempty"`
+	NetUnitPrice struct {
+		Amount   float64 `json:"amount,omitempty"`
+		Currency string  `json:"currency,omitempty"`
+	} `json:"netUnitPrice,omitempty"`
+
+	GrossUnitPrice struct {
+		Amount   float64 `json:"amount,omitempty"`
+		Currency string  `json:"currency,omitempty"`
+	} `json:"grossUnitPrice,omitempty"`
+
+	Quantity  float64 `json:"quantity,omitempty"`
+	NetAmount struct {
+		Amount   float64 `json:"amount,omitempty"`
+		Currency string  `json:"currency,omitempty"`
+	} `json:"netAmount,omitempty"`
+
+	GrossAmount struct {
+		Amount   float64 `json:"amount,omitempty"`
+		Currency string  `json:"currency,omitempty"`
+	} `json:"grossAmount,omitempty"`
+
+	TransactionCode struct {
+		Code        string `json:"code,omitempty"`
+		Description string `json:"description,omitempty"`
+	} `json:"transactionCode,omitempty"`
+
+	Comment           string `json:"comment,omitempty"`
+	CashierNumber     int64  `json:"cashierNumber,omitempty"`
+	TransactionAmount struct {
+		Amount   float64 `json:"amount,omitempty"`
+		Currency string  `json:"currency,omitempty"`
+	} `json:"transactionAmount,omitempty"`
+
+	IsMainTransaction bool `json:"isMainTransaction,omitempty"`
+	Taxes             []struct {
+		TransactionCode struct {
+			Code        string `json:"code,omitempty"`
+			Description string `json:"description,omitempty"`
+		} `json:"transactionCode,omitempty"`
+
+		UnitPrice struct {
+			Amount   float64 `json:"amount,omitempty"`
+			Currency string  `json:"currency,omitempty"`
+		} `json:"unitPrice,omitempty"`
+
+		Quantity float64 `json:"quantity,omitempty"`
+
+		Amount struct {
+			Amount   float64 `json:"amount,omitempty"`
+			Currency string  `json:"currency,omitempty"`
+		} `json:"amount,omitempty"`
+
+		IsIncluded bool   `json:"isIncluded,omitempty"`
+		TaxRuleID  string `json:"taxRuleId,omitempty"`
+	} `json:"taxes,omitempty"`
+
+	RevenueDate string `json:"revenueDate,omitempty"`
+}
+
+type FolioTransaction struct {
+	ID            string   `json:"id,omitempty"`
+	Version       int64    `json:"version,omitempty"`
+	CreationDate  DateTime `json:"creationDate,omitempty"`
+	BusinessDate  DateTime `json:"businessDate,omitempty"`
+	ExternalDate  string   `json:"externalDate,omitempty"`
+	WorkstationID string   `json:"workstationId,omitempty"`
+	NetUnitPrice  struct {
+		Amount   float64 `json:"amount,omitempty"`
+		Currency string  `json:"currency,omitempty"`
+	} `json:"netUnitPrice,omitempty"`
+
+	GrossUnitPrice struct {
+		Amount   float64 `json:"amount,omitempty"`
+		Currency string  `json:"currency,omitempty"`
+	} `json:"grossUnitPrice,omitempty"`
+
+	BaseUnitPrice struct {
+		Amount   float64 `json:"amount,omitempty"`
+		Currency string  `json:"currency,omitempty"`
+	} `json:"baseUnitPrice,omitempty"`
+
+	Quantity float64 `json:"quantity,omitempty"`
+
+	NetAmount struct {
+		Amount   float64 `json:"amount,omitempty"`
+		Currency string  `json:"currency,omitempty"`
+	} `json:"netAmount,omitempty"`
+
+	GrossAmount struct {
+		Amount   float64 `json:"amount,omitempty"`
+		Currency string  `json:"currency,omitempty"`
+	} `json:"grossAmount,omitempty"`
+
+	TransactionCode struct {
+		Code        string `json:"code,omitempty"`
+		Description string `json:"description,omitempty"`
+	} `json:"transactionCode,omitempty"`
+
+	Comment                      string  `json:"comment,omitempty"`
+	Remarks                      string  `json:"remarks,omitempty"`
+	Description                  string  `json:"description,omitempty"`
+	CheckNumber                  string  `json:"checkNumber,omitempty"`
+	HasGuestCheckDetails         bool    `json:"hasGuestCheckDetails,omitempty"`
+	Reference                    string  `json:"reference,omitempty"`
+	NumberOfCovers               []int32 `json:"numberOfCovers,omitempty"`
+	TransactionGroupTypeCode     string  `json:"transactionGroupTypeCode,omitempty"`
+	CashierID                    int64   `json:"cashierId,omitempty"`
+	IsVoided                     bool    `json:"isVoided,omitempty"`
+	IsVoidedCreditCardOperation  bool    `json:"isVoidedCreditCardOperation,omitempty"`
+	IsVoidingCreditCardOperation bool    `json:"isVoidingCreditCardOperation,omitempty"`
+	IsRefunded                   string  `json:"isRefunded,omitempty"`
+	RefundedAmount               struct {
+		Amount   float64 `json:"amount,omitempty"`
+		Currency string  `json:"currency,omitempty"`
+	} `json:"refundedAmount,omitempty"`
+
+	InternalTransactions []FolioInternalTransaction `json:"internalTransactions,omitempty"`
+	IsPackage            bool                       `json:"isPackage,omitempty"`
+	TransactionAmount    struct {
+		Amount   float64 `json:"amount,omitempty"`
+		Currency string  `json:"currency,omitempty"`
+	} `json:"transactionAmount,omitempty"`
+	VoidedFolioTransactionBusinessDate string `json:"voidedFolioTransactionBusinessDate,omitempty"`
+	PostingMethod                      string `json:"postingMethod,omitempty"`
+	PostingOriginator                  string `json:"postingOriginator,omitempty"`
+	UserDetails                        struct {
+		ID        string `json:"id,omitempty"`
+		FirstName string `json:"firstName,omitempty"`
+		LastName  string `json:"lastName,omitempty"`
+		FullName  string `json:"fullName,omitempty"`
+	} `json:"userDetails,omitempty"`
+
+	IsRounding     bool `json:"isRounding,omitempty"`
+	OriginatorInfo struct {
+		ProfileID     string `json:"profileId,omitempty"`
+		AccountID     string `json:"accountId,omitempty"`
+		RoomID        string `json:"roomId,omitempty"`
+		AccountNumber string `json:"accountNumber,omitempty"`
+		RoomNumber    string `json:"roomNumber,omitempty"`
+	} `json:"originatorInfo,omitempty"`
+
+	PerformedActions              []string `json:"performedActions,omitempty"`
+	IsAdvancedDepositCredit       bool     `json:"isAdvancedDepositCredit,omitempty"`
+	IsTaxTransaction              bool     `json:"isTaxTransaction,omitempty"`
+	IsTaxIncluded                 bool     `json:"isTaxIncluded,omitempty"`
+	OriginatorID                  string   `json:"originatorId,omitempty"`
+	ShowALlInternalTransactions   bool     `json:"showAllInternalTransactions,omitempty"`
+	IsAdvancedDeposit             bool     `json:"isAdvancedDeposit,omitempty"`
+	IsOnSitePayment               string   `json:"isOnSitePayment,omitempty"`
+	FixedChargeID                 string   `json:"fixedChargeId,omitempty"`
+	CreditCardOperationID         string   `json:"creditCardOperationId,omitempty"`
+	IsCreditCardOperation         bool     `json:"isCreditCardOperation,omitempty"`
+	IsGuestLedgerPrepaymentCredit bool     `json:"isGuestLedgerPrepaymentCredit,omitempty"`
+	IsGuestLedgerPrepayment       bool     `json:"isGuestLedgerPrepayment,omitempty"`
 }
