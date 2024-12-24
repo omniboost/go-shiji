@@ -2283,3 +2283,72 @@ type ProfileResponse struct {
 	HasImage       bool   `json:"hasImage,omitempty"`
 	ProfileStoreID string `json:"profileStoreId,omitempty"`
 }
+
+type FolioItem struct {
+	ID              string `json:"id,omitempty"`
+	Version         int64  `json:"version,omitempty"`
+	ProfileID       string `json:"profileId,omitempty"`
+	ProfileRoleCode struct {
+		Code        string `json:"code,omitempty"`
+		Description string `json:"description,omitempty"`
+	} `json:"profileRoleCode,omitempty"`
+	Number        string `json:"number,omitempty"`
+	FolioTypeCode struct {
+		Code        string `json:"code,omitempty"`
+		Description string `json:"description,omitempty"`
+	} `json:"folioTypeCode,omitempty"`
+
+	FolioStyleCode struct {
+		Code        string `json:"code,omitempty"`
+		Description string `json:"description,omitempty"`
+	} `json:"folioStyleCode,omitempty"`
+
+	AdditionalText  string `json:"additionalText,omitempty"`
+	FolioStatusCode struct {
+		Code        string `json:"code,omitempty"`
+		Description string `json:"description,omitempty"`
+	} `json:"folioStatusCode,omitempty"`
+
+	BillingStatusCode struct {
+		Code        string `json:"code,omitempty"`
+		Description string `json:"description,omitempty"`
+	} `json:"billingStatusCode,omitempty"`
+
+	BillViewAllowed       bool `json:"billViewAllowed,omitempty"`
+	RemoteCheckOutAllowed bool `json:"remoteCheckOutAllowed,omitempty"`
+	GrossBalance          struct {
+		Amount   float64 `json:"amount,omitempty"`
+		Currency string  `json:"currency,omitempty"`
+	} `json:"grossBalance,omitempty"`
+
+	InvoiceNumber                                  string   `json:"invoiceNumber,omitempty"`
+	IsAutomaticallyCreated                         bool     `json:"isAutomaticallyCreated,omitempty"`
+	VoidedFolioWindowID                            string   `json:"voidedFolioWindowId,omitempty"`
+	VoidReason                                     string   `json:"voidReason,omitempty"`
+	ContactProfileID                               string   `json:"contactProfileId,omitempty"`
+	ContactProfileRoles                            []string `json:"contactProfileRoles,omitempty"`
+	OriginFolioWindowID                            string   `json:"originFolioWindowId,omitempty"`
+	IsLocked                                       bool     `json:"isLocked,omitempty"`
+	IsInvoiceGenerated                             bool     `json:"isInvoiceGenerated,omitempty"`
+	IsInvoiceCorrectionFinishedSuccessfully        string   `json:"isInvoiceCorrectionFinishedSuccessfully,omitempty"`
+	IsInvoiceGenerationFinishedSuccessfully        string   `json:"isInvoiceGenerationFinishedSuccessfully,omitempty"`
+	IsAdvanceDepositCorrectionFinishedSuccessfully string   `json:"isAdvanceDepositCorrectionFinishedSuccessfully,omitempty"`
+	IsPostDirectlyInArFinishedSuccessfully         string   `json:"isPostDirectlyInArFinishedSuccessfully,omitempty"`
+	IsOriginalInvoiceProvided                      string   `json:"isOriginalInvoiceProvided,omitempty"`
+	IsInternalCorrection                           bool     `json:"isInternalCorrection,omitempty"`
+	FolioConstraintsItem                           struct {
+		ID           string `json:"id,omitempty"`
+		BalanceLimit struct {
+			Amount   float64 `json:"amount,omitempty"`
+			Currency string  `json:"currency,omitempty"`
+		} `json:"balanceLimit,omitempty"`
+
+		AllowedTransactionCodesIDs []string `json:"allowedTransactionCodesIds,omitempty"`
+		AllowedPaymentTypes        []string `json:"allowedPaymentTypes,omitempty"`
+	} `json:"folioConstrainsItem,omitempty"`
+
+	IsTaxExemptionApplied                                 bool   `json:"isTaxExemptionApplied,omitempty"`
+	IsCheckedOutWithoutInvoiceGeneration                  string `json:"isCheckedOutWithoutInvoiceGeneration,omitempty"`
+	IsGuestLedgerPrepaymentCreationFinishedSuccessfully   string `json:"isGuestLedgerPrepaymentCreationFinishedSuccessfully,omitempty"`
+	IsGuestLedgerPrepaymentCorrectionFinishedSuccessfully string `json:"isGuestLedgerPrepaymentCorrectionFinishedSuccessfully,omitempty"`
+}
