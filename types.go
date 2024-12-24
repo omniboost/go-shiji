@@ -1779,7 +1779,7 @@ type PatchIndividual struct {
 	ExternalSystemIdentifiers []struct {
 		Operation string `json:"operation,omitempty"`
 		ID        string `json:"id,omitempty"`
-		Value     struct {
+		Value     *struct {
 			ExternalSystemID string `json:"externalSystemId,omitempty"`
 			Identifier       string `json:"identifier,omitempty"`
 		} `json:"value,omitempty"`
@@ -1895,4 +1895,391 @@ type Zone struct {
 	Description        string   `json:"description"`
 	StatusCode         string   `json:"statusCode"`
 	EntityTypeCodes    []string `json:"entityTypeCodes"`
+}
+
+type ProfileResponse struct {
+	ID       string `json:"id,omitempty"`
+	RoleCode struct {
+		Code         string `json:"code,omitempty"`
+		LanguageCode string `json:"languageCode,omitempty"`
+		Description  string `json:"description,omitempty"`
+	} `json:"roleCode,omitempty"`
+
+	TypeCode LocalizedIDCodeValue `json:"typeCode,omitempty"`
+	Status   struct {
+		IsActive               bool                 `json:"isActive,omitempty"`
+		DeactivationReasonCode LocalizedIDCodeValue `json:"deactivationReasonCode,omitempty"`
+		IsRestricted           bool                 `json:"isRestricted,omitempty"`
+		RestrictionReasonCode  LocalizedIDCodeValue `json:"restrictionReasonCode,omitempty"`
+		RestrictionComment     string               `json:"restrictionComment,omitempty"`
+		IsLocked               bool                 `json:"isLocked,omitempty"`
+		LockedReason           string               `json:"lockedReason,omitempty"`
+		ForReview              bool                 `json:"forReview,omitempty"`
+	} `json:"status,omitempty"`
+
+	IndividualDetails struct {
+		TitleCode       LocalizedIDCodeValue `json:"titleCode,omitempty"`
+		FirstName       string               `json:"firstName,omitempty"`
+		LastName        string               `json:"lastName,omitempty"`
+		NationalityCode struct {
+			Code         string `json:"code,omitempty"`
+			LanguageCode string `json:"languageCode,omitempty"`
+			Description  string `json:"description,omitempty"`
+		} `json:"nationalityCode,omitempty"`
+
+		Greeting string `json:"greeting,omitempty"`
+		VIPCode  struct {
+			Color        string `json:"color,omitempty"`
+			ID           string `json:"id,omitempty"`
+			Code         string `json:"code,omitempty"`
+			LanguageCode string `json:"languageCode,omitempty"`
+			Description  string `json:"description,omitempty"`
+		} `json:"vipCode,omitempty"`
+
+		GenderDetails           LocalizedIDCodeValue `json:"genderDetails,omitempty"`
+		BirthdayAnniversaryDate struct {
+			Month int32 `json:"month,omitempty"`
+			Day   int32 `json:"day,omitempty"`
+			Year  int32 `json:"year,omitempty"`
+		} `json:"birthdayAnniversaryDate,omitempty"`
+
+		PreferredLanguageProfileDetails struct {
+			LanguageCode struct {
+				Code         string `json:"code,omitempty"`
+				LanguageCode string `json:"languageCode,omitempty"`
+				Description  string `json:"description,omitempty"`
+			} `json:"languageCode,omitempty"`
+
+			LocalizedIndividualProfileDetails struct {
+				Title     string `json:"title,omitempty"`
+				FirstName string `json:"firstName,omitempty"`
+				LastName  string `json:"lastName,omitempty"`
+				Greeting  string `json:"greeting,omitempty"`
+			} `json:"localizedIndividualProfileDetails,omitempty"`
+		} `json:"preferredLanguageProfileDetails,omitempty"`
+
+		Anniversaries []struct {
+			Date struct {
+				Month int32 `json:"month,omitempty"`
+				Day   int32 `json:"day,omitempty"`
+				Year  int32 `json:"year,omitempty"`
+			} `json:"date,omitempty"`
+
+			Description string `json:"description,omitempty"`
+		} `json:"anniversaries,omitempty"`
+
+		CompanyName                        string               `json:"companyName,omitempty"`
+		PositionName                       string               `json:"positionName,omitempty"`
+		MiddleName                         string               `json:"middleName,omitempty"`
+		Suffix                             LocalizedIDCodeValue `json:"suffix,omitempty"`
+		PreferredCommunicationLanguageCode struct {
+			Code         string `json:"code,omitempty"`
+			LanguageCode string `json:"languageCode,omitempty"`
+			Description  string `json:"description,omitempty"`
+		} `json:"preferredCommunicationLanguageCode,omitempty"`
+
+		HonoraryTitle   LocalizedIDCodeValue `json:"honoraryTitle,omitempty"`
+		TaxID           string               `json:"taxId,omitempty"`
+		AdditionalNames []struct {
+			Type  string `json:"type,omitempty"`
+			Value string `json:"value,omitempty"`
+		} `json:"additionalNames,omitempty"`
+	} `json:"individualDetails,omitempty"`
+
+	CompanyDetails struct {
+		FullName                        string                 `json:"fullName,omitempty"`
+		Abbreviation                    string                 `json:"abbreviation,omitempty"`
+		CorporateID                     string                 `json:"corporateId,omitempty"`
+		TaxID                           string                 `json:"taxId,omitempty"`
+		IndustryCodes                   []LocalizedIDCodeValue `json:"industryCodes,omitempty"`
+		BusinessSegmentCodes            []LocalizedIDCodeValue `json:"bUsinessSegmentCodes,omitempty"`
+		PreferredLanguageProfileDetails struct {
+			LanguageCode struct {
+				Code         string `json:"code,omitempty"`
+				LanguageCode string `json:"languageCode,omitempty"`
+				Description  string `json:"description,omitempty"`
+			} `json:"languageCode,omitempty"`
+
+			FullName string `json:"fullName,omitempty"`
+		} `json:"preferredLanguageProfileDetails,omitempty"`
+
+		PreferredCommunicationLanguageCode struct {
+			Code         string `json:"code,omitempty"`
+			LanguageCode string `json:"languageCode,omitempty"`
+			Description  string `json:"description,omitempty"`
+		} `json:"preferredCommunicationLanguageCode,omitempty"`
+	} `json:"companyDetails,omitempty"`
+
+	TravelAgentDetails struct {
+		FullName                        string                 `json:"fullName,omitempty"`
+		Abbreviation                    string                 `json:"abbreviation,omitempty"`
+		IATA                            string                 `json:"iata,omitempty"`
+		TaxID                           string                 `json:"taxId,omitempty"`
+		BusinessSegmentCode             []LocalizedIDCodeValue `json:"businessSegmentCode,omitempty"`
+		PreferredLanguageProfileDetails struct {
+			LanguageCode struct {
+				Code         string `json:"code,omitempty"`
+				LanguageCode string `json:"languageCode,omitempty"`
+				Description  string `json:"description,omitempty"`
+			} `json:"languageCode,omitempty"`
+
+			FullName string `json:"fullName,omitempty"`
+		} `json:"preferredLanguageProfileDetails,omitempty"`
+
+		PreferredCommunicationLanguageCode struct {
+			Code         string `json:"code,omitempty"`
+			LanguageCode string `json:"languageCode,omitempty"`
+			Description  string `json:"description,omitempty"`
+		} `json:"preferredCommunicationLanguageCode,omitempty"`
+
+		IndustryCodes []LocalizedIDCodeValue `json:"industryCodes,omitempty"`
+	} `json:"travelAgentDetails,omitempty"`
+
+	Addresses []struct {
+		AddressTypeCode LocalizedIDCodeValue `json:"addressTypeCode,omitempty"`
+		AddressLine1    string               `json:"addressLine1,omitempty"`
+		AddressLine2    string               `json:"addressLine2,omitempty"`
+		City            string               `json:"city,omitempty"`
+		PostalCode      string               `json:"postalCode,omitempty"`
+		StateCode       struct {
+			Code         string `json:"code,omitempty"`
+			LanguageCode string `json:"languageCode,omitempty"`
+			Description  string `json:"description,omitempty"`
+		} `json:"stateCode,omitempty"`
+
+		CountryCode struct {
+			Code         string `json:"code,omitempty"`
+			LanguageCode string `json:"languageCode,omitempty"`
+			Description  string `json:"description,omitempty"`
+		} `json:"countryCode,omitempty"`
+
+		LanguageCode struct {
+			Code         string `json:"code,omitempty"`
+			LanguageCode string `json:"languageCode,omitempty"`
+			Description  string `json:"description,omitempty"`
+		} `json:"languageCode,omitempty"`
+
+		IsPrimary   bool                 `json:"isPrimary,omitempty"`
+		IsArPrimary bool                 `json:"isArPrimary,omitempty"`
+		DistrictID  LocalizedIDCodeValue `json:"districtId,omitempty"`
+		ID          string               `json:"id,omitempty"`
+	} `json:"addresses,omitempty"`
+
+	CommunicationChannels []struct {
+		ID       string               `json:"id,omitempty"`
+		TypeCode LocalizedIDCodeValue `json:"typeCode,omitempty"`
+		ModeCode struct {
+			Code         string `json:"code,omitempty"`
+			LanguageCode string `json:"languageCode,omitempty"`
+			Description  string `json:"description,omitempty"`
+		} `json:"modeCode,omitempty"`
+
+		Details   string `json:"details,omitempty"`
+		IsPrimary bool   `json:"isPrimary,omitempty"`
+	} `json:"communicationChannels,omitempty"`
+
+	DisabilityCodes  []LocalizedIDCodeValue `json:"disabilityCodes,omitempty"`
+	NotesIdentifiers []string               `json:"notesIdentifiers,omitempty"`
+	Memberships      []struct {
+		ID         string               `json:"id,omitempty"`
+		IsActive   bool                 `json:"isActive,omitempty"`
+		LevelCode  LocalizedIDCodeValue `json:"levelCode,omitempty"`
+		TypeCode   LocalizedIDCodeValue `json:"typeCode,omitempty"`
+		Number     string               `json:"number,omitempty"`
+		SinceDate  Date                 `json:"sinceDate,omitempty"`
+		ExpiryDate Date                 `json:"expiryDate,omitempty"`
+	} `json:"memberships,omitempty"`
+
+	Documents []struct {
+		ID               string               `json:"id,omitempty"`
+		ParentVersion    int64                `json:"parentVersion,omitempty"`
+		TypeCode         LocalizedIDCodeValue `json:"typeCode,omitempty"`
+		Number           string               `json:"number,omitempty"`
+		ExpiryDate       Date                 `json:"expiryDate,omitempty"`
+		IssueDate        Date                 `json:"issueDate,omitempty"`
+		IssueCountryCode struct {
+			Code         string `json:"code,omitempty"`
+			LanguageCode string `json:"languageCode,omitempty"`
+			Description  string `json:"description,omitempty"`
+		} `json:"issueCountryCode,omitempty"`
+
+		IssuePlace       string `json:"issuePlace,omitempty"`
+		IssuedBy         string `json:"issuedBy,omitempty"`
+		BirthCountryCode struct {
+			Code         string `json:"code,omitempty"`
+			LanguageCode string `json:"languageCode,omitempty"`
+			Description  string `json:"description,omitempty"`
+		} `json:"birthCountryCode,omitempty"`
+
+		BirthDate       Date   `json:"birthDate,omitempty"`
+		BirthPlace      string `json:"birthPlace,omitempty"`
+		NationalityCode struct {
+			Code         string `json:"code,omitempty"`
+			LanguageCode string `json:"languageCode,omitempty"`
+			Description  string `json:"description,omitempty"`
+		} `json:"nationalityCode,omitempty"`
+
+		AdditionalInfo string `json:"additionalInfo,omitempty"`
+	} `json:"documents,omitempty"`
+
+	Metadata ProfileMetadata `json:"metadata,omitempty"`
+
+	NotDuplicateProfiles struct {
+		Collection []struct {
+			NotDuplicateProfileID string `json:"notDuplicateProfileId,omitempty"`
+			ProfileID             string `json:"profileId,omitempty"`
+			ProfileRoleCode       string `json:"profileRoleCode,omitempty"`
+		} `json:"collection,omitempty"`
+
+		Count int32 `json:"count,omitempty"`
+	} `json:"notDuplicateProfiles,omitempty"`
+
+	FreezeStatus struct {
+		IsFrozen   bool   `json:"isFrozen,omitempty"`
+		Reason     string `json:"reason,omitempty"`
+		PropertyID string `json:"propertyId,omitempty"`
+		Source     string `json:"source,omitempty"`
+	} `json:"freezeStatus,omitempty"`
+
+	Consents []struct {
+		ConsentID   string          `json:"consentId,omitempty"`
+		IsGranted   bool            `json:"isGranted,omitempty"`
+		GrantedAt   DateTime        `json:"grantedAt,omitempty"`
+		ConsentType string          `json:"consentType,omitempty"`
+		Source      string          `json:"source,omitempty"`
+		Description string          `json:"description,omitempty"`
+		Metadata    ProfileMetadata `json:"metadata,omitempty"`
+		ExpiryDate  Date            `json:"expiryDate,omitempty"`
+	} `json:"consents,omitempty"`
+
+	ExternalSystemIdentifiers []struct {
+		ExternalSystemID string `json:"externalSystemId,omitempty"`
+		Identifier       string `json:"identifier,omitempty"`
+	} `json:"externalSystemIdentifiers,omitempty"`
+
+	GroupStatus struct {
+		IsGrouped  bool   `json:"isGrouped,omitempty"`
+		GroupID    string `json:"groupId,omitempty"`
+		PropertyID string `json:"propertyId,omitempty"`
+		Code       string `json:"code,omitempty"`
+		Name       string `json:"name,omitempty"`
+	} `json:"groupStatus,omitempty"`
+
+	ContactProfiles []struct {
+		ContactProfileID                  string   `json:"contactProfileId,omitempty"`
+		ContactProfileRole                string   `json:"contactProfileRole,omitempty"`
+		IsPrimary                         bool     `json:"isPrimary,omitempty"`
+		Roles                             []string `json:"roles,omitempty"`
+		ContactProfileAvailabilityDetails struct {
+			ProfileStoreID                   string   `json:"profileStoreId,omitempty"`
+			RegionCode                       string   `json:"regionCode,omitempty"`
+			IsAvailableOutsideOfSourceRegion bool     `json:"isAvailableOutsideOfSourceRegion,omitempty"`
+			AvailableInRegions               []string `json:"availableInRegions,omitempty"`
+		} `json:"contactProfileAvailabilityDetails,omitempty"`
+	} `json:"contactProfiles,omitempty"`
+
+	ContactFor []struct {
+		ContactProfileID                  string   `json:"contactProfileId,omitempty"`
+		ContactProfileRole                string   `json:"contactProfileRole,omitempty"`
+		IsPrimary                         bool     `json:"isPrimary,omitempty"`
+		Roles                             []string `json:"roles,omitempty"`
+		ContactProfileAvailabilityDetails struct {
+			ProfileStoreID                   string   `json:"profileStoreId,omitempty"`
+			RegionCode                       string   `json:"regionCode,omitempty"`
+			IsAvailableOutsideOfSourceRegion bool     `json:"isAvailableOutsideOfSourceRegion,omitempty"`
+			AvailableInRegions               []string `json:"availableInRegions,omitempty"`
+		} `json:"contactProfileAvailabilityDetails,omitempty"`
+	} `json:"contactFor,omitempty"`
+
+	IsIncognito      bool `json:"isIncognito,omitempty"`
+	IncognitoDetails struct {
+		FirstName string `json:"firstName,omitempty"`
+		LastName  string `json:"lastName,omitempty"`
+	} `json:"incognitoDetails,omitempty"`
+
+	ProfileOwners struct {
+		Primary struct {
+			ID string `json:"id,omitempty"`
+		} `json:"primary,omitempty"`
+
+		Others []struct {
+			ID string `json:"id,omitempty"`
+		} `json:"others,omitempty"`
+	} `json:"profileOwners,omitempty"`
+
+	ProfileLastActivity struct {
+		PerformedAt DateTime `json:"performedAt,omitempty"`
+		DaysAgo     int32    `json:"daysAgo,omitempty"`
+		PerformedBy string   `json:"performedBy,omitempty"`
+	} `json:"profileLastActivity,omitempty"`
+
+	TaxExemption struct {
+		Code    LocalizedIDCodeValue `json:"code,omitempty"`
+		Comment string               `json:"comment,omitempty"`
+	} `json:"taxExemption,omitempty"`
+
+	Preferences []struct {
+		ID               string               `json:"id,omitempty"`
+		PreferenceCode   LocalizedIDCodeValue `json:"preferenceCode,omitempty"`
+		IsPreferred      bool                 `json:"isPreferred,omitempty"`
+		IsGlobal         bool                 `json:"isGlobal,omitempty"`
+		OriginPropertyID string               `json:"originPropertyId,omitempty"`
+		IsRequired       bool                 `json:"isRequired,omitempty"`
+		Weight           int32                `json:"weight,omitempty"`
+	} `json:"preferences,omitempty"`
+
+	Version int64 `json:"version,omitempty"`
+
+	MembershipDetails struct {
+		Manual []struct {
+			MembershipID string `json:"membershipId,omitempty"`
+			Number       string `json:"number,omitempty"`
+			Status       struct {
+				IsActive bool `json:"isActive,omitempty"`
+			} `json:"status,omitempty"`
+
+			MembershipType  LocalizedIDCodeValue `json:"membershipType,omitempty"`
+			MembershipLevel struct {
+				Color        string `json:"color,omitempty"`
+				ID           string `json:"id,omitempty"`
+				Code         string `json:"code,omitempty"`
+				LanguageCode string `json:"languageCode,omitempty"`
+				Description  string `json:"description,omitempty"`
+			} `json:"membershipLevel,omitempty"`
+
+			SinceDate  Date `json:"sinceDate,omitempty"`
+			ExpiryDate Date `json:"expiryDate,omitempty"`
+		} `json:"manual,omitempty"`
+
+		Internal []struct {
+			MembershipID string `json:"membershipId,omitempty"`
+			Number       string `json:"number,omitempty"`
+			Status       struct {
+				IsActive bool `json:"isActive,omitempty"`
+			} `json:"status,omitempty"`
+
+			MembershipType  LocalizedIDCodeValue `json:"membershipType,omitempty"`
+			MembershipLevel struct {
+				Color        string `json:"color,omitempty"`
+				ID           string `json:"id,omitempty"`
+				Code         string `json:"code,omitempty"`
+				LanguageCode string `json:"languageCode,omitempty"`
+				Description  string `json:"description,omitempty"`
+			} `json:"membershipLevel,omitempty"`
+
+			SinceDate  Date `json:"sinceDate,omitempty"`
+			ExpiryDate Date `json:"expiryDate,omitempty"`
+		} `json:"internal,omitempty"`
+	} `json:"membershipDetails,omitempty"`
+
+	RelationshipDetails struct {
+		IsRoot bool `json:"isRoot,omitempty"`
+	} `json:"relationshipDetails,omitempty"`
+
+	ExternalAccountReceivable struct {
+		ExternalAccountReceivableNumber string `json:"externalAccountReceivableNumber,omitempty"`
+	} `json:"externalAccountReceivable,omitempty"`
+
+	HasImage       bool   `json:"hasImage,omitempty"`
+	ProfileStoreID string `json:"profileStoreId,omitempty"`
 }
