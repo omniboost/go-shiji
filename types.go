@@ -1867,6 +1867,183 @@ type PatchIndividual struct {
 	} `json:"taxExemptDetails,omitempty"`
 }
 
+type PatchCompany struct {
+	Details *struct {
+		FullName                        string   `json:"fullName,omitempty"`
+		CorporateID                     string   `json:"corporateId,omitempty"`
+		Abbreviation                    string   `json:"abbreviation,omitempty"`
+		TaxID                           string   `json:"taxId,omitempty"`
+		IndustryCodes                   []string `json:"industryCodes,omitempty"`
+		BusinessSegmentCodes            []string `json:"businessSegmentCodes,omitempty"`
+		PreferredLanguageProfileDetails struct {
+			LanguageCode string `json:"languageCode,omitempty"`
+			FullName     string `json:"fullName,omitempty"`
+		} `json:"preferredLanguageProfileDetails,omitempty"`
+
+		PreferredCommunicationLanguageCode string `json:"preferredCommunicationLanguageCode,omitempty"`
+	} `json:"details,omitempty"`
+
+	CommunicationChannels []struct {
+		Operation string `json:"operation,omitempty"`
+		ID        string `json:"id,omitempty"`
+		Value     struct {
+			TypeID  string `json:"typeId,omitempty"`
+			Mode    string `json:"mode,omitempty"`
+			Details string `json:"details,omitempty"`
+			Primary bool   `json:"primary,omitempty"`
+		} `json:"value,omitempty"`
+	} `json:"communicationChannels,omitempty"`
+
+	AddressDetails []struct {
+		Operation string `json:"operation,omitempty"`
+		ID        string `json:"id,omitempty"`
+		Value     struct {
+			AddressLine1    string `json:"addressLine1,omitempty"`
+			AddressLine2    string `json:"addressLine2,omitempty"`
+			City            string `json:"city,omitempty"`
+			CountryCode     string `json:"countryCode,omitempty"`
+			IsArPrimary     bool   `json:"isArPrimary,omitempty"`
+			IsPrimary       bool   `json:"isPrimary,omitempty"`
+			LanguageCode    string `json:"languageCode,omitempty"`
+			PostalCode      string `json:"postalCode,omitempty"`
+			StateCode       string `json:"stateCode,omitempty"`
+			AddressTypeCode string `json:"addressTypeCode,omitempty"`
+			DistrictID      string `json:"districtId,omitempty"`
+		} `json:"value,omitempty"`
+	} `json:"addressDetails,omitempty"`
+
+	IdentificationDocuments []struct {
+		Operation string `json:"operation,omitempty"`
+		ID        string `json:"id,omitempty"`
+		Value     struct {
+			TypeCode         string   `json:"typeCode,omitempty"`
+			Number           string   `json:"number,omitempty"`
+			ExpiryDate       Date     `json:"expiryDate,omitempty"`
+			IssueDate        Date     `json:"issueDate,omitempty"`
+			IssueCountryCode string   `json:"issueCountryCode,omitempty"`
+			IssuePlace       string   `json:"issuePlace,omitempty"`
+			IssuedBy         string   `json:"issuedBy,omitempty"`
+			BirthCountryCode string   `json:"birthCountryCode,omitempty"`
+			BirthPlace       string   `json:"birthPlace,omitempty"`
+			BirthDate        Date     `json:"birthDate,omitempty"`
+			NationailtyCode  string   `json:"nationailtyCode,omitempty"`
+			AdditionalInfo   string   `json:"additionalInfo,omitempty"`
+			ImageRefs        []string `json:"imageRefs,omitempty"`
+		} `json:"value,omitempty"`
+	} `json:"identificationDocuments,omitempty"`
+
+	Consents []struct {
+		Operation string `json:"operation,omitempty"`
+		ID        string `json:"id,omitempty"`
+		Value     struct {
+			ConsentID   string `json:"consentId,omitempty"`
+			Source      string `json:"source,omitempty"`
+			Description string `json:"description,omitempty"`
+			ExpiryDate  Date   `json:"expiryDate,omitempty"`
+			IsGranted   bool   `json:"isGranted,omitempty"`
+		} `json:"value,omitempty"`
+	} `json:"consents,omitempty"`
+
+	DisabilityStatuses []struct {
+		Operation string `json:"operation,omitempty"`
+		ID        string `json:"id,omitempty"`
+		Value     struct {
+			ID string `json:"id,omitempty"`
+		} `json:"value,omitempty"`
+	} `json:"disabilityStatuses,omitempty"`
+
+	AttachedEntitiesPaths     []string `json:"attachedEntitiesPaths,omitempty"`
+	ExternalSystemIdentifiers []struct {
+		Operation string `json:"operation,omitempty"`
+		ID        string `json:"id,omitempty"`
+		Value     *struct {
+			ExternalSystemID string `json:"externalSystemId,omitempty"`
+			Identifier       string `json:"identifier,omitempty"`
+		} `json:"value,omitempty"`
+	} `json:"externalSystemIdentifiers,omitempty"`
+
+	ProfileOwners []struct {
+		Operation string `json:"operation,omitempty"`
+		ID        string `json:"id,omitempty"`
+		Value     struct {
+			ID        string `json:"id,omitempty"`
+			IsPrimary bool   `json:"isPrimary,omitempty"`
+		} `json:"value,omitempty"`
+	} `json:"profileOwners,omitempty"`
+
+	Attachments []struct {
+		Operation string `json:"operation,omitempty"`
+		ID        string `json:"id,omitempty"`
+		Value     struct {
+			Name        string `json:"name,omitempty"`
+			Description string `json:"description,omitempty"`
+			IsGlobal    bool   `json:"isGlobal,omitempty"`
+		} `json:"value,omitempty"`
+	} `json:"attachments,omitempty"`
+
+	AttachmentFiles []struct {
+		Operation string `json:"operation,omitempty"`
+		ID        string `json:"id,omitempty"`
+		Value     struct {
+			Name string `json:"name,omitempty"`
+		} `json:"value,omitempty"`
+	} `json:"attachmentFiles,omitempty"`
+
+	OtherPaymentMethod []struct {
+		Operation string `json:"operation,omitempty"`
+		ID        string `json:"id,omitempty"`
+		Value     struct {
+			TransactionCodeID string `json:"transactionCodeId,omitempty"`
+		} `json:"value,omitempty"`
+	} `json:"otherPaymentMethod,omitempty"`
+
+	CreditCardStandalone []struct {
+		Operation string `json:"operation,omitempty"`
+		ID        string `json:"id,omitempty"`
+		Value     struct {
+			TransactionCodeID string `json:"transactionCodeId,omitempty"`
+			CreditCardToken   string `json:"creditCardToken,omitempty"`
+			Prefix6           string `json:"prefix6,omitempty"`
+			Suffix4           string `json:"suffix4,omitempty"`
+			ExpiryMonth       int32  `json:"expiryMonth,omitempty"`
+			ExpiryYear        int32  `json:"expiryYear,omitempty"`
+		} `json:"value,omitempty"`
+	} `json:"creditCardStandalone,omitempty"`
+
+	CreditCardOffline []struct {
+		Operation string `json:"operation,omitempty"`
+		ID        string `json:"id,omitempty"`
+		Value     struct {
+			TransactionCodeID string `json:"transactionCodeId,omitempty"`
+			CardHolder        string `json:"cardHolder,omitempty"`
+			CardNumber        string `json:"cardNumber,omitempty"`
+			ExpiryYear        int32  `json:"expiryYear,omitempty"`
+			ExpiryMonth       int32  `json:"expiryMonth,omitempty"`
+			CardToken         string `json:"cardToken,omitempty"`
+		} `json:"value,omitempty"`
+	} `json:"creditCardOffline,omitempty"`
+
+	Memberships []struct {
+		Operation string `json:"operation,omitempty"`
+		ID        string `json:"id,omitempty"`
+		Value     struct {
+			LevelCode  string `json:"levelCode,omitempty"`
+			TypeCode   string `json:"typeCode,omitempty"`
+			Number     string `json:"number,omitempty"`
+			SinceDate  Date   `json:"sinceDate,omitempty"`
+			ExpiryDate Date   `json:"expiryDate,omitempty"`
+			IsActive   bool   `json:"isActive,omitempty"`
+		} `json:"value,omitempty"`
+	} `json:"memberships,omitempty"`
+
+	TaxExemptDetails *struct {
+		Comment string `json:"comment,omitempty"`
+		Reasons []struct {
+			TaxExemptReasonId string `json:"taxExemptReasonId,omitempty"`
+		} `json:"reasons,omitempty"`
+	} `json:"taxExemptDetails,omitempty"`
+}
+
 type ExternalSystem struct {
 	ID   string `json:"id,omitempty"`
 	Code string `json:"code,omitempty"`
