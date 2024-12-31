@@ -2680,7 +2680,7 @@ type FolioTransaction struct {
 	OriginatorID                  string   `json:"originatorId,omitempty"`
 	ShowALlInternalTransactions   bool     `json:"showAllInternalTransactions,omitempty"`
 	IsAdvancedDeposit             bool     `json:"isAdvancedDeposit,omitempty"`
-	IsOnSitePayment               string   `json:"isOnSitePayment,omitempty"`
+	IsOnSitePayment               bool     `json:"isOnSitePayment,omitempty"`
 	FixedChargeID                 string   `json:"fixedChargeId,omitempty"`
 	CreditCardOperationID         string   `json:"creditCardOperationId,omitempty"`
 	IsCreditCardOperation         bool     `json:"isCreditCardOperation,omitempty"`
