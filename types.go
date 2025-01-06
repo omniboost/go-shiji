@@ -2819,7 +2819,7 @@ type FolioTransaction struct {
 	IsVoided                     bool    `json:"isVoided,omitempty"`
 	IsVoidedCreditCardOperation  bool    `json:"isVoidedCreditCardOperation,omitempty"`
 	IsVoidingCreditCardOperation bool    `json:"isVoidingCreditCardOperation,omitempty"`
-	IsRefunded                   string  `json:"isRefunded,omitempty"`
+	IsRefunded                   bool    `json:"isRefunded,omitempty"`
 	RefundedAmount               struct {
 		Amount   float64 `json:"amount,omitempty"`
 		Currency string  `json:"currency,omitempty"`
