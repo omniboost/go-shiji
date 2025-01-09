@@ -234,8 +234,8 @@ type TaxRule struct {
 		IsChildren bool `json:"isChildren"`
 	} `json:"chargeMethodPerPersonDefinition"`
 
-	ValidFromDate                DateTime `json:"validFromDate"`
-	ValidToDate                  DateTime `json:"validToDate"`
+	ValidFromDate                Date     `json:"validFromDate"`
+	ValidToDate                  Date     `json:"validToDate"`
 	TransactionCodeID            string   `json:"transactionCodeId"`
 	ApplicableTransactionCodeIDs []string `json:"applicableTransactionCodeIds"`
 	AgeBucketIDs                 []string `json:"ageBucketIds"`
@@ -2863,4 +2863,24 @@ type FolioTransaction struct {
 	IsCreditCardOperation         bool     `json:"isCreditCardOperation,omitempty"`
 	IsGuestLedgerPrepaymentCredit bool     `json:"isGuestLedgerPrepaymentCredit,omitempty"`
 	IsGuestLedgerPrepayment       bool     `json:"isGuestLedgerPrepayment,omitempty"`
+}
+
+type AggregatedExtractResult struct {
+	TaxRule              []TaxRule             `json:"taxRule"`
+	TransactionCodes     []TransactionCode     `json:"transactionCode"`
+	TransactionGroups    []TransactionGroup    `json:"transactionGroup"`
+	TransactionSubGroups []TransactionSubGroup `json:"TransactionSubGroup"`
+}
+
+type AggregatedPaginatedResponse struct {
+	Results AggregatedExtractResult `json:"results"`
+	Paging  struct {
+		PageNumber int `json:"pageNumber"`
+		PageSize   int `json:"pageSize"`
+		TotalCount int `json:"totalCount"`
+	} `json:"paging"`
+}
+
+func (r AggregatedPaginatedResponse) TotalCount() int {
+	return len(r.Results.TaxRule) + len(r.Results.TransactionCodes) + len(r.Results.TransactionGroups) + len(r.Results.TransactionSubGroups)
 }
