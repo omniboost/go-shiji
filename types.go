@@ -2684,7 +2684,7 @@ type FolioItem struct {
 	OriginFolioWindowID                            string   `json:"originFolioWindowId,omitempty"`
 	IsLocked                                       bool     `json:"isLocked,omitempty"`
 	IsInvoiceGenerated                             bool     `json:"isInvoiceGenerated,omitempty"`
-	IsInvoiceCorrectionFinishedSuccessfully        string   `json:"isInvoiceCorrectionFinishedSuccessfully,omitempty"`
+	IsInvoiceCorrectionFinishedSuccessfully        bool     `json:"isInvoiceCorrectionFinishedSuccessfully,omitempty"`
 	IsInvoiceGenerationFinishedSuccessfully        bool     `json:"isInvoiceGenerationFinishedSuccessfully,omitempty"`
 	IsAdvanceDepositCorrectionFinishedSuccessfully bool     `json:"isAdvanceDepositCorrectionFinishedSuccessfully,omitempty"`
 	IsPostDirectlyInArFinishedSuccessfully         bool     `json:"isPostDirectlyInArFinishedSuccessfully,omitempty"`
