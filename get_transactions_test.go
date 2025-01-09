@@ -29,8 +29,9 @@ func TestGetTransactionsAll(t *testing.T) {
 	client := client()
 
 	req := client.NewGetTransactionsRequest()
-	req.Headers().PropertyID = "806c52a0-753d-4a03-a4ad-0d5b577a11dc"
+	req.Headers().PropertyID = "50abb838-0a4e-4bea-afb4-28523f8f8daa"
 	req.QueryParams().DateType = "BusinessDate"
+	req.QueryParams().Extend = shiji.CommaSeparatedQueryParam{"TaxTransactions", "ReservationDetails"}
 	req.QueryParams().LedgerTypes = shiji.CommaSeparatedQueryParam{"Guest", "Deposit"}
 	req.QueryParams().StartDate = shiji.Date{time.Date(
 		2024, 11, 1, 0, 0, 0, 0, time.UTC,

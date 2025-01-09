@@ -35,6 +35,7 @@ type GetTransactionsQueryParams struct {
 	StartDate     Date                     `schema:"startDate,omitempty"`
 	EndDate       Date                     `schema:"endDate,omitempty"`
 	DateType      string                   `schema:"dateType,omitempty"`
+	Extend        CommaSeparatedQueryParam `schema:"extend,omitempty"`
 	PageSize      int32                    `schema:"pageSize,omitempty"`
 	SeekReference string                   `schema:"seekReference,omitempty"`
 	LedgerTypes   CommaSeparatedQueryParam `schema:"ledgerTypes,omitempty"`

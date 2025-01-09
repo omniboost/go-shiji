@@ -1294,6 +1294,54 @@ type Transaction struct {
 		Description string `json:"description"`
 	} `json:"transactionSubGroup"`
 
+	Reservation struct {
+		ID                 string `json:"id"`
+		RoomNumber         string `json:"roomNumber"`
+		ConfirmationNumber string `json:"confirmationNumber"`
+		RoomType           struct {
+			ID          string `json:"id"`
+			Code        string `json:"code"`
+			Description string `json:"description"`
+			Name        string `json:"name"`
+		} `json:"roomType"`
+
+		PrimaryGuest struct{} `json:"primaryGuest"`
+
+		MarketSegment struct {
+			ID          string `json:"id"`
+			Code        string `json:"code"`
+			Description string `json:"description"`
+		} `json:"marketSegment"`
+
+		BookingSource struct {
+			ID          string `json:"id"`
+			Code        string `json:"code"`
+			Description string `json:"description"`
+		} `json:"bookingSource"`
+
+		DistributionChannel struct {
+			ID          string `json:"id"`
+			Code        string `json:"code"`
+			Description string `json:"description"`
+		} `json:"distributionChannel"`
+	} `json:"reservation"`
+
+	TaxTransactions []struct {
+		ID                   string  `json:"id"`
+		PropertyID           string  `json:"propertyId"`
+		TenantID             string  `json:"tenantId"`
+		IsIncluded           bool    `json:"isIncluded"`
+		PricePerUnit         float64 `json:"pricePerUnit"`
+		Quantity             float64 `json:"quantity"`
+		TotalAmount          float64 `json:"totalAmount"`
+		TotalAmountUnrounded float64 `json:"totalAmountUnrounded"`
+		TaxAmountCurrency    string  `json:"taxAmountCurrency"`
+		TaxTransactionCodeID string  `json:"taxTransactionCodeId"`
+		TaxTransactionCode   string  `json:"taxTransactionCode"`
+		TransactionID        string  `json:"transactionId"`
+		PostingGroupID       string  `json:"postingGroupId"`
+	} `json:"taxTransactions"`
+
 	NetAmount      float64 `json:"netAmount"`
 	GrossAmount    float64 `json:"grossAmount"`
 	TaxAmount      float64 `json:"taxAmount"`
