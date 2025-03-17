@@ -161,6 +161,10 @@ func (r *GetFolioTransactionsOfAccountByIDRequest) Do() (GetFolioTransactionsOfA
 
 func (r *GetFolioTransactionsOfAccountByIDRequest) All() ([]FolioTransaction, error) {
 	transactions := []FolioTransaction{}
+
+	// Set the page number to 1
+	r.QueryParams().PageNumber = 1
+
 	for {
 		resp, err := r.Do()
 		if err != nil {
