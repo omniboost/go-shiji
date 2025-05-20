@@ -3,6 +3,8 @@ package shiji_test
 import (
 	"context"
 	"fmt"
+	"log"
+	"net/url"
 	"os"
 
 	"github.com/omniboost/go-shiji"
@@ -12,6 +14,7 @@ func client() *shiji.Client {
 	clientID := os.Getenv("OAUTH_CLIENT_ID")
 	clientSecret := os.Getenv("OAUTH_CLIENT_SECRET")
 	tokenURL := os.Getenv("OAUTH_TOKEN_URL")
+	shijiBaseURL := os.Getenv("SHIJI_BASE_URL")
 	shijiTenant := os.Getenv("SHIJI_TENANT")
 	shijiUsername := os.Getenv("SHIJI_USERNAME")
 	shijiPassword := os.Getenv("SHIJI_PASSWORD")
@@ -33,5 +36,13 @@ func client() *shiji.Client {
 	client := shiji.NewClient(httpClient)
 	client.SetDebug(true)
 	client.SetDisallowUnknownFields(true)
+
+	if shijiBaseURL != "" {
+		u, err := url.Parse(shijiBaseURL)
+		if err != nil {
+			log.Fatal(err)
+		}
+    	client.SetBaseURL(*u)
+	}
 	return client
 }
