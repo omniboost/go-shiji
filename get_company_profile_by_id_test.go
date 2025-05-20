@@ -12,8 +12,9 @@ func TestGetCompanyProfileByID(t *testing.T) {
 	client := client()
 
 	req := client.NewGetCompanyProfileByIDRequest()
-	req.Headers().PropertyID = "806c52a0-753d-4a03-a4ad-0d5b577a11dc"
-	req.PathParams().ID = "8e3aaa77-fcde-42de-9e75-fbf4d02ca018"
+	req.Headers().PropertyID = "f142d311-7fd8-46c8-afbe-6fd50c03244d"
+	req.PathParams().ID = "e5bd9019-3c49-42cd-8cc2-15d9e3ccf176"
+	req.QueryParams().Extend = []string{"LocalExternalAccountReceivable"}
 
 	resp, err := req.Do()
 	if err != nil {

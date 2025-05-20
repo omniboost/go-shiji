@@ -31,7 +31,9 @@ func (c *Client) NewGetCompanyProfileByIDQueryParams() *GetCompanyProfileByIDQue
 	return &GetCompanyProfileByIDQueryParams{}
 }
 
-type GetCompanyProfileByIDQueryParams struct{}
+type GetCompanyProfileByIDQueryParams struct{
+	Extend CommaSeparatedQueryParam `schema:"extend,omitempty"`
+}
 
 func (p GetCompanyProfileByIDQueryParams) ToURLValues() (url.Values, error) {
 	encoder := utils.NewSchemaEncoder()

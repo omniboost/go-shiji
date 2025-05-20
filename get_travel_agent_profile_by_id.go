@@ -31,7 +31,9 @@ func (c *Client) NewGetTravelAgentProfileByIDQueryParams() *GetTravelAgentProfil
 	return &GetTravelAgentProfileByIDQueryParams{}
 }
 
-type GetTravelAgentProfileByIDQueryParams struct{}
+type GetTravelAgentProfileByIDQueryParams struct {
+	Extend CommaSeparatedQueryParam `schema:"extend,omitempty"`
+}
 
 func (p GetTravelAgentProfileByIDQueryParams) ToURLValues() (url.Values, error) {
 	encoder := utils.NewSchemaEncoder()

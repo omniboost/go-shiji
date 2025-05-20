@@ -12,8 +12,9 @@ func TestGetIndividualProfileByID(t *testing.T) {
 	client := client()
 
 	req := client.NewGetIndividualProfileByIDRequest()
-	req.Headers().PropertyID = "806c52a0-753d-4a03-a4ad-0d5b577a11dc"
-	req.PathParams().ID = "66cf9f8d-c665-4078-bf8f-6ecf01205d1d"
+	req.Headers().PropertyID = "cb5774da-e261-4421-90f6-070525fdb007"
+	req.PathParams().ID = "28d2ed1f-5dcf-4783-b4da-3dbebad08d3e"
+	// req.QueryParams().Extend = []string{"LocalExternalAccountReceivable"}
 
 	resp, err := req.Do()
 	if err != nil {
