@@ -122,7 +122,7 @@ func (r *GetTravelAgentProfileByIDRequest) NewResponseBody() *GetTravelAgentProf
 type GetTravelAgentProfileByIDResponseBody TravelAgentProfile
 
 func (r *GetTravelAgentProfileByIDRequest) URL() *url.URL {
-	u := r.client.GetEndpointURL("api-gateway/profiles/v1/travel-agent/{{.id}}", r.PathParams())
+	u := r.client.GetEndpointURL("api-gateway/profiles/v0/travel-agent/{{.id}}", r.PathParams())
 	return &u
 }
 
