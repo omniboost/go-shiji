@@ -31,7 +31,7 @@ func (c *Client) NewGetCompanyProfileByIDQueryParams() *GetCompanyProfileByIDQue
 	return &GetCompanyProfileByIDQueryParams{}
 }
 
-type GetCompanyProfileByIDQueryParams struct {
+type GetCompanyProfileByIDQueryParams struct{
 	Extend CommaSeparatedQueryParam `schema:"extend,omitempty"`
 }
 
@@ -122,7 +122,7 @@ func (r *GetCompanyProfileByIDRequest) NewResponseBody() *GetCompanyProfileByIDR
 type GetCompanyProfileByIDResponseBody CompanyProfile
 
 func (r *GetCompanyProfileByIDRequest) URL() *url.URL {
-	u := r.client.GetEndpointURL("api-gateway/profiles/v0/company/{{.id}}", r.PathParams())
+	u := r.client.GetEndpointURL("api-gateway/profiles/v1/company/{{.id}}", r.PathParams())
 	return &u
 }
 

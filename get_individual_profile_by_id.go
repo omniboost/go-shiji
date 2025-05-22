@@ -31,7 +31,7 @@ func (c *Client) NewGetIndividualProfileByIDQueryParams() *GetIndividualProfileB
 	return &GetIndividualProfileByIDQueryParams{}
 }
 
-type GetIndividualProfileByIDQueryParams struct {
+type GetIndividualProfileByIDQueryParams struct{
 	Extend CommaSeparatedQueryParam `schema:"extend,omitempty"`
 }
 
@@ -122,7 +122,7 @@ func (r *GetIndividualProfileByIDRequest) NewResponseBody() *GetIndividualProfil
 type GetIndividualProfileByIDResponseBody IndividualProfile
 
 func (r *GetIndividualProfileByIDRequest) URL() *url.URL {
-	u := r.client.GetEndpointURL("api-gateway/profiles/v0/individual/{{.id}}", r.PathParams())
+	u := r.client.GetEndpointURL("api-gateway/profiles/v1/individual/{{.id}}", r.PathParams())
 	return &u
 }
 
