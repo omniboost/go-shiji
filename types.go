@@ -1,6 +1,8 @@
 package shiji
 
-import "strings"
+import (
+	"strings"
+)
 
 type CommaSeparatedQueryParam []string
 
@@ -613,6 +615,98 @@ type CompanyProfile struct {
 	} `json:"externalAccountReceivable"`
 
 	HasImage bool `json:"hasImage"`
+}
+
+type CompanyProfileV0 struct {
+	ID           string `json:"id"`
+	IsActive     bool   `json:"isActive"`
+	IsRestricted bool   `json:"isRestricted"`
+	Version      int    `json:"version"`
+	TypeCode     string `json:"typeCode"`
+	TypeID       string `json:"typeId"`
+
+	Details struct {
+		FullName                           string   `json:"fullName"`
+		TaxID                              string   `json:"taxId"`
+		BusinessSegmentCodes               []string `json:"businessSegmentCodes"`
+		PreferredCommunicationLanguageCode string   `json:"preferredCommunicationLanguageCode"`
+		BusinessSegmentIds                 []string `json:"businessSegmentIds"`
+	} `json:"details"`
+
+	CommunicationDetails []struct {
+		ID       string `json:"id"`
+		TypeID   string `json:"typeId"`
+		TypeCode string `json:"typeCode"`
+		Mode     string `json:"mode"`
+		Details  string `json:"details"`
+		Primary  bool   `json:"primary"`
+	} `json:"communicationDetails"`
+
+	Addresses []struct {
+		ID           string `json:"id"`
+		CountryCode  string `json:"countryCode"`
+		City         string `json:"city"`
+		PostCode     string `json:"postCode"`
+		AddressLine1 string `json:"addressLine1"`
+		TypeCode     string `json:"typeCode"`
+		TypeID       string `json:"typeId"`
+		Primary      bool   `json:"primary"`
+		LanguageCode string `json:"languageCode"`
+		ArPrimary    bool   `json:"arPrimary"`
+
+		CountrySpecificFields []struct {
+			CountrySpecificField LocalizedIDCodeValue `json:"countrySpecificField"`
+
+			Value struct {
+				Type      string `json:"type"`
+				String    string `json:"string"`
+				LocalDate Date   `json:"localDate"`
+				Array     []any  `json:"array"`
+			}
+		} `json:"countrySpecificFields"`
+	} `json:"addresses"`
+
+	IsLocked  bool `json:"isLocked"`
+	ForReview bool `json:"forReview"`
+
+	NotDuplicateProfiles struct {
+		Collection []struct {
+			NotDuplicateProfileID string `json:"notDuplicateProfileId"`
+			ProfileID             string `json:"profileId"`
+			ProfileRoleCode       string `json:"profileRoleCode"`
+		} `json:"collection"`
+
+		NotDuplicateProfilesCount int `json:"notDuplicateProfilesCount"`
+	} `json:"notDuplicateProfiles"`
+
+	FreezeStatus struct {
+		IsFrozen   bool   `json:"isFrozen"`
+		Reason     string `json:"reason"`
+		PropertyID string `json:"propertyId"`
+		Source     string `json:"source"`
+	} `json:"freezeStatus"`
+
+	ExternalSystemIdentifiers []ProfilesExternalIdentifier `json:"externalSystemIdentifiers"`
+	NotesIdentifiers          []string                     `json:"notesIdentifiers"`
+	ContactProfiles           []ContactProfileResponse     `json:"contactProfiles"`
+	ContactFor                []ContactProfileResponse     `json:"contactFor"`
+	HasImage                  bool                         `json:"hasImage"`
+	ProfileStoreID            string                       `json:"profileStoreId"`
+
+	Metadata ProfileMetadata `json:"metadata"`
+
+	Embedded struct {
+		LocalExternalAccountReceivable struct {
+			Number string `json:"number"`
+		} `json:"localExternalAccountReceivable"`
+	} `json:"_embedded"`
+
+	ProfileAvailabilityDetails struct {
+		ProfileStoreID                   string   `json:"profileStoreId"`
+		RegionCode                       string   `json:"regionCode"`
+		IsAvailableOutsideOfSourceRegion bool     `json:"isAvailableOutsideOfSourceRegion"`
+		AvailableInRegions               []string `json:"availableInRegions"`
+	} `json:"profileAvailabilityDetails"`
 }
 
 type IndividualProfile struct {
