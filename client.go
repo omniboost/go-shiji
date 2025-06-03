@@ -236,7 +236,7 @@ func (c *Client) Do(req *http.Request, responseBody interface{}) (*http.Response
 
 	errorResponse := &ErrorResponse{Response: httpResp}
 	statusErrResponse := &StatusErrorResponse{Response: httpResp}
-	err = c.Unmarshal(httpResp.Body, []any{responseBody}, []any{errorResponse, statusErrResponse})
+	err = c.Unmarshal(httpResp.Body, []any{}, []any{responseBody, errorResponse, statusErrResponse})
 	if err != nil {
 		return httpResp, err
 	}
