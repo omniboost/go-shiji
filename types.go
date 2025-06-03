@@ -708,6 +708,8 @@ type CompanyProfileV0 struct {
 		IsAvailableOutsideOfSourceRegion bool     `json:"isAvailableOutsideOfSourceRegion"`
 		AvailableInRegions               []string `json:"availableInRegions"`
 	} `json:"profileAvailabilityDetails"`
+
+	ExternalAccountReceivableNumber string `json:"externalAccountReceivableNumber"`
 }
 
 type IndividualProfile struct {
@@ -1056,6 +1058,8 @@ type IndividualProfileV0 struct {
 		IsAvailableOutsideOfSourceRegion bool     `json:"isAvailableOutsideOfSourceRegion"`
 		AvailableInRegions               []string `json:"availableInRegions"`
 	} `json:"profileAvailabilityDetails"`
+
+	ExternalAccountReceivableNumber string `json:"externalAccountReceivableNumber"`
 }
 
 type IndividualProfileV2 struct {
@@ -1445,6 +1449,79 @@ type TravelAgentProfile struct {
 	} `json:"externalAccountReceivable"`
 
 	HasImage bool `json:"hasImage"`
+}
+
+type TravelAgentProfileV0 struct {
+	ID           string `json:"id"`
+	IsActive     bool   `json:"isActive"`
+	IsRestricted bool   `json:"isRestricted"`
+	Version      int    `json:"version"`
+	TypeCode     string `json:"typeCode"`
+	TypeID       string `json:"typeId"`
+
+	Details struct {
+		FullName                           string        `json:"fullName"`
+		BusinessSegmentCodes               []interface{} `json:"businessSegmentCodes"`
+		PreferredCommunicationLanguageCode string        `json:"preferredCommunicationLanguageCode"`
+		BusinessSegmentIds                 []interface{} `json:"businessSegmentIds"`
+	} `json:"details"`
+
+	CommunicationDetails []CommunicationDetail `json:"communicationDetails"`
+	Addresses            []struct {
+		ID                    string        `json:"id"`
+		CountryCode           string        `json:"countryCode"`
+		StateCode             string        `json:"stateCode"`
+		City                  string        `json:"city"`
+		PostCode              string        `json:"postCode"`
+		AddressLine1          string        `json:"addressLine1"`
+		AddressLine2          string        `json:"addressLine2"`
+		TypeCode              string        `json:"typeCode"`
+		TypeID                string        `json:"typeId"`
+		Primary               bool          `json:"primary"`
+		LanguageCode          string        `json:"languageCode"`
+		ArPrimary             bool          `json:"arPrimary"`
+		CountrySpecificFields []interface{} `json:"countrySpecificFields"`
+	} `json:"addresses"`
+
+	IsLocked  bool `json:"isLocked"`
+	ForReview bool `json:"forReview"`
+
+	FreezeStatus struct {
+		IsFrozen bool   `json:"isFrozen"`
+		Reason   string `json:"reason"`
+	} `json:"freezeStatus"`
+
+	ExternalSystemIdentifiers []struct {
+		ExternalSystemID string `json:"externalSystemId,omitempty"`
+		Identifier       string `json:"identifier,omitempty"`
+	} `json:"externalSystemIdentifiers,omitempty"`
+
+	HasImage       bool   `json:"hasImage"`
+	ProfileStoreID string `json:"profileStoreId"`
+
+	Metadata struct {
+		CreatorID               string    `json:"creatorId"`
+		CreationTime            time.Time `json:"creationTime"`
+		LastUpdaterID           string    `json:"lastUpdaterId"`
+		LastUpdateTime          time.Time `json:"lastUpdateTime"`
+		CreatedInPropertyID     string    `json:"createdInPropertyId"`
+		LastUpdatedInPropertyID string    `json:"lastUpdatedInPropertyId"`
+	} `json:"metadata"`
+
+	Embedded struct {
+		LocalExternalAccountReceivable struct {
+			Number string `json:"number"`
+		} `json:"localExternalAccountReceivable"`
+	} `json:"_embedded"`
+
+	ProfileAvailabilityDetails struct {
+		ProfileStoreID                   string   `json:"profileStoreId"`
+		RegionCode                       string   `json:"regionCode"`
+		IsAvailableOutsideOfSourceRegion bool     `json:"isAvailableOutsideOfSourceRegion"`
+		AvailableInRegions               []string `json:"availableInRegions"`
+	} `json:"profileAvailabilityDetails"`
+
+	ExternalAccountReceivableNumber string `json:"externalAccountReceivableNumber"`
 }
 
 type Transaction struct {
