@@ -2,6 +2,7 @@ package shiji
 
 import (
 	"strings"
+	"time"
 )
 
 type CommaSeparatedQueryParam []string
@@ -935,6 +936,126 @@ type IndividualProfile struct {
 	ExternalAccountReceivable struct {
 		ExternalAccountReceivableNumber string `json:"externalAccountReceivableNumber"`
 	} `json:"externalAccountReceivable"`
+}
+
+type IndividualProfileV0 struct {
+	ID           string `json:"id"`
+	IsActive     bool   `json:"isActive"`
+	IsRestricted bool   `json:"isRestricted"`
+	Version      int    `json:"version"`
+	TypeCode     string `json:"typeCode"`
+	TypeID       string `json:"typeId"`
+
+	Details struct {
+		FirstName                          string `json:"firstName"`
+		LastName                           string `json:"lastName"`
+		TitleCode                          string `json:"titleCode"`
+		TitleID                            string `json:"titleId"`
+		Greeting                           string `json:"greeting"`
+		PreferredCommunicationLanguageCode string `json:"preferredCommunicationLanguageCode"`
+	} `json:"details"`
+
+	CommunicationDetails []CommunicationDetail `json:"communicationDetails"`
+	Addresses            []struct {
+		ID                    string        `json:"id"`
+		CountryCode           string        `json:"countryCode"`
+		City                  string        `json:"city"`
+		PostCode              string        `json:"postCode"`
+		AddressLine1          string        `json:"addressLine1"`
+		TypeCode              string        `json:"typeCode"`
+		TypeID                string        `json:"typeId"`
+		Primary               bool          `json:"primary"`
+		LanguageCode          string        `json:"languageCode"`
+		ArPrimary             bool          `json:"arPrimary"`
+		CountrySpecificFields []interface{} `json:"countrySpecificFields"`
+	} `json:"addresses"`
+
+	Preferences []struct {
+		ID               string               `json:"id"`
+		PreferenceCode   LocalizedIDCodeValue `json:"preferenceCode"`
+		IsPreferred      bool                 `json:"isPreferred"`
+		IsGlobal         bool                 `json:"isGlobal"`
+		OriginPropertyID string               `json:"originPropertyId"`
+		IsRequired       bool                 `json:"isRequired"`
+		Weight           int32                `json:"weight"`
+	} `json:"preferences"`
+
+	IdentificationDocuments []struct {
+		TypeCode         string   `json:"typeCode,omitempty"`
+		Number           string   `json:"number,omitempty"`
+		ExpiryDate       Date     `json:"expiryDate,omitempty"`
+		IssueDate        Date     `json:"issueDate,omitempty"`
+		IssueCountryCode string   `json:"issueCountryCode,omitempty"`
+		IssuePlace       string   `json:"issuePlace,omitempty"`
+		IssuedBy         string   `json:"issuedBy,omitempty"`
+		BirthCountryCode string   `json:"birthCountryCode,omitempty"`
+		BirthPlace       string   `json:"birthPlace,omitempty"`
+		BirthDate        Date     `json:"birthDate,omitempty"`
+		NationailtyCode  string   `json:"nationailtyCode,omitempty"`
+		AdditionalInfo   string   `json:"additionalInfo,omitempty"`
+		ImageRefs        []string `json:"imageRefs,omitempty"`
+	} `json:"identificationDocuments"`
+
+	IsLocked             bool `json:"isLocked"`
+	ForReview            bool `json:"forReview"`
+	NotDuplicateProfiles struct {
+		Collection []struct {
+			NotDuplicateProfileID string `json:"notDuplicateProfileId"`
+			ProfileID             string `json:"profileId"`
+			ProfileRoleCode       string `json:"profileRoleCode"`
+		} `json:"collection"`
+
+		NotDuplicateProfilesCount int `json:"notDuplicateProfilesCount"`
+	} `json:"notDuplicateProfiles"`
+
+	FreezeStatus struct {
+		IsFrozen   bool   `json:"isFrozen"`
+		Reason     string `json:"reason"`
+		PropertyID string `json:"propertyId"`
+		Source     string `json:"source"`
+	} `json:"freezeStatus"`
+
+	Consents []struct {
+		ConsentID   string          `json:"consentId"`
+		IsGranted   bool            `json:"isGranted"`
+		GrantedAt   DateTime        `json:"grantedAt"`
+		ConsentType string          `json:"consentType"`
+		Source      string          `json:"source"`
+		Metadata    ProfileMetadata `json:"metadata"`
+		ExpiryDate  Date            `json:"expiryDate"`
+	} `json:"consents"`
+
+	ExternalSystemIdentifiers []ProfilesExternalIdentifier `json:"externalSystemIdentifiers"`
+	ContactProfiles           []ContactProfileResponse     `json:"contactProfiles"`
+	ContactFor                []ContactProfileResponse     `json:"contactFor"`
+	HasImage                  bool                         `json:"hasImage"`
+	ProfileStoreID            string                       `json:"profileStoreId"`
+	ProfileLastActivity       struct {
+		PerformedBy string    `json:"performedBy"`
+		PerformedAt time.Time `json:"performedAt"`
+	} `json:"profileLastActivity"`
+
+	Metadata struct {
+		CreatorID               string    `json:"creatorId"`
+		CreationTime            time.Time `json:"creationTime"`
+		LastUpdaterID           string    `json:"lastUpdaterId"`
+		LastUpdateTime          time.Time `json:"lastUpdateTime"`
+		CreatedInPropertyID     string    `json:"createdInPropertyId"`
+		LastUpdatedInPropertyID string    `json:"lastUpdatedInPropertyId"`
+	} `json:"metadata"`
+
+	Embedded struct {
+		LocalExternalAccountReceivable struct {
+			Number string `json:"number"`
+		} `json:"localExternalAccountReceivable"`
+	} `json:"_embedded"`
+
+	ProfileAvailabilityDetails struct {
+		ProfileStoreID                   string   `json:"profileStoreId"`
+		RegionCode                       string   `json:"regionCode"`
+		IsAvailableOutsideOfSourceRegion bool     `json:"isAvailableOutsideOfSourceRegion"`
+		AvailableInRegions               []string `json:"availableInRegions"`
+	} `json:"profileAvailabilityDetails"`
 }
 
 type IndividualProfileV2 struct {
