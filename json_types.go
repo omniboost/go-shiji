@@ -51,7 +51,7 @@ type DateTime struct {
 }
 
 func (d *DateTime) MarshalJSON() ([]byte, error) {
-	if d.Time.IsZero() {
+	if d.IsZero() {
 		return json.Marshal(nil)
 	}
 
@@ -59,7 +59,7 @@ func (d *DateTime) MarshalJSON() ([]byte, error) {
 }
 
 func (d DateTime) IsEmpty() bool {
-	return d.Time.IsZero()
+	return d.IsZero()
 }
 
 func (d *DateTime) UnmarshalJSON(text []byte) (err error) {
@@ -104,7 +104,7 @@ type Time struct {
 }
 
 func (d *Time) MarshalJSON() ([]byte, error) {
-	if d.Time.IsZero() {
+	if d.IsZero() {
 		return json.Marshal(nil)
 	}
 
@@ -112,7 +112,7 @@ func (d *Time) MarshalJSON() ([]byte, error) {
 }
 
 func (d Time) IsEmpty() bool {
-	return d.Time.IsZero()
+	return d.IsZero()
 }
 
 func (d *Time) UnmarshalJSON(text []byte) (err error) {
@@ -179,14 +179,14 @@ func (i Int) MarshalJSON() ([]byte, error) {
 type Bool bool
 
 func (b Bool) MarshalJSON() ([]byte, error) {
-	if b == true {
+	if b {
 		return json.Marshal("1")
 	}
 	return json.Marshal("0")
 }
 
 func (b Bool) MarshalSchema() string {
-	if b == true {
+	if b {
 		return "true"
 	}
 	return "false"

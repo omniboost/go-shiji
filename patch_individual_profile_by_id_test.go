@@ -1,6 +1,7 @@
 package shiji_test
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"testing"
@@ -19,7 +20,7 @@ func TestPatchIndividualProfileByID(t *testing.T) {
 	body.Details.FirstName = "Emma"
 
 	req.SetRequestBody(body)
-	resp, err := req.Do()
+	resp, err := req.Do(context.Background())
 	if err != nil {
 		t.Error(err)
 	}

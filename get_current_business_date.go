@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -124,9 +125,9 @@ func (r *GetCurrentBusinessDateRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetCurrentBusinessDateRequest) Do() (GetCurrentBusinessDateResponseBody, error) {
+func (r *GetCurrentBusinessDateRequest) Do(ctx context.Context) (GetCurrentBusinessDateResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}

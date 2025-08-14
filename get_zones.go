@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -126,9 +127,9 @@ func (r *GetZonesRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetZonesRequest) Do() (GetZonesResponseBody, error) {
+func (r *GetZonesRequest) Do(ctx context.Context) (GetZonesResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}
@@ -149,10 +150,10 @@ func (r *GetZonesRequest) Do() (GetZonesResponseBody, error) {
 	return *responseBody, err
 }
 
-func (r *GetZonesRequest) All() ([]Zone, error) {
+func (r *GetZonesRequest) All(ctx context.Context) ([]Zone, error) {
 	zones := []Zone{}
 	for {
-		resp, err := r.Do()
+		resp, err := r.Do(ctx)
 		if err != nil {
 			return zones, err
 		}

@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -126,9 +127,9 @@ func (r *GetV0CompanyProfileByIDRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetV0CompanyProfileByIDRequest) Do() (GetV0CompanyProfileByIDResponseBody, error) {
+func (r *GetV0CompanyProfileByIDRequest) Do(ctx context.Context) (GetV0CompanyProfileByIDResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}

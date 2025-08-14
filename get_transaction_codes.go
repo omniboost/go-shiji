@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -128,9 +129,9 @@ func (r *GetTransactionCodesRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetTransactionCodesRequest) Do() (GetTransactionCodesResponseBody, error) {
+func (r *GetTransactionCodesRequest) Do(ctx context.Context) (GetTransactionCodesResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}
@@ -151,10 +152,10 @@ func (r *GetTransactionCodesRequest) Do() (GetTransactionCodesResponseBody, erro
 	return *responseBody, err
 }
 
-func (r *GetTransactionCodesRequest) All() ([]TransactionCode, error) {
+func (r *GetTransactionCodesRequest) All(ctx context.Context) ([]TransactionCode, error) {
 	transactionCodes := []TransactionCode{}
 	for {
-		resp, err := r.Do()
+		resp, err := r.Do(ctx)
 		if err != nil {
 			return transactionCodes, err
 		}

@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -112,9 +113,9 @@ func (r *GetConfigurationSupportedTypesRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetConfigurationSupportedTypesRequest) Do() (GetConfigurationSupportedTypesResponseBody, error) {
+func (r *GetConfigurationSupportedTypesRequest) Do(ctx context.Context) (GetConfigurationSupportedTypesResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}
@@ -130,10 +131,10 @@ func (r *GetConfigurationSupportedTypesRequest) Do() (GetConfigurationSupportedT
 	return *responseBody, err
 }
 
-func (r *GetConfigurationSupportedTypesRequest) All() ([]ConfigurationSupportedType, error) {
+func (r *GetConfigurationSupportedTypesRequest) All(ctx context.Context) ([]ConfigurationSupportedType, error) {
 	supportedTypes := []ConfigurationSupportedType{}
 	for {
-		resp, err := r.Do()
+		resp, err := r.Do(ctx)
 		if err != nil {
 			return supportedTypes, err
 		}

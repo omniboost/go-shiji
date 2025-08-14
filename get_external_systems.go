@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -129,9 +130,9 @@ func (r *GetExternalSystemsRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetExternalSystemsRequest) Do() (GetExternalSystemsResponseBody, error) {
+func (r *GetExternalSystemsRequest) Do(ctx context.Context) (GetExternalSystemsResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}
@@ -156,10 +157,10 @@ func (r *GetExternalSystemsRequest) Do() (GetExternalSystemsResponseBody, error)
 	return *responseBody, err
 }
 
-func (r *GetExternalSystemsRequest) All() ([]ExternalSystem, error) {
+func (r *GetExternalSystemsRequest) All(ctx context.Context) ([]ExternalSystem, error) {
 	externalSystems := []ExternalSystem{}
 	for {
-		resp, err := r.Do()
+		resp, err := r.Do(ctx)
 		if err != nil {
 			return externalSystems, err
 		}

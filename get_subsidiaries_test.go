@@ -1,6 +1,7 @@
 package shiji_test
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"testing"
@@ -13,7 +14,7 @@ func TestGetSubsidiaries(t *testing.T) {
 
 	req := client.NewGetSubsidiariesRequest()
 
-	resp, err := req.Do()
+	resp, err := req.Do(context.Background())
 	if err != nil {
 		t.Error(err)
 	}

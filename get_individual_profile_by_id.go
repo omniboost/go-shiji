@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -31,7 +32,7 @@ func (c *Client) NewGetIndividualProfileByIDQueryParams() *GetIndividualProfileB
 	return &GetIndividualProfileByIDQueryParams{}
 }
 
-type GetIndividualProfileByIDQueryParams struct{
+type GetIndividualProfileByIDQueryParams struct {
 	Extend CommaSeparatedQueryParam `schema:"extend,omitempty"`
 }
 
@@ -126,9 +127,9 @@ func (r *GetIndividualProfileByIDRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetIndividualProfileByIDRequest) Do() (GetIndividualProfileByIDResponseBody, error) {
+func (r *GetIndividualProfileByIDRequest) Do(ctx context.Context) (GetIndividualProfileByIDResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}

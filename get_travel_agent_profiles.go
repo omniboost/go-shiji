@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -128,9 +129,9 @@ func (r *GetTravelAgentProfilesRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetTravelAgentProfilesRequest) Do() (GetTravelAgentProfilesResponseBody, error) {
+func (r *GetTravelAgentProfilesRequest) Do(ctx context.Context) (GetTravelAgentProfilesResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}
@@ -149,10 +150,10 @@ func (r *GetTravelAgentProfilesRequest) Do() (GetTravelAgentProfilesResponseBody
 	return *responseBody, err
 }
 
-func (r *GetTravelAgentProfilesRequest) All() ([]TravelAgentProfile, error) {
+func (r *GetTravelAgentProfilesRequest) All(ctx context.Context) ([]TravelAgentProfile, error) {
 	travelAgencies := []TravelAgentProfile{}
 	for {
-		resp, err := r.Do()
+		resp, err := r.Do(ctx)
 		if err != nil {
 			return travelAgencies, err
 		}

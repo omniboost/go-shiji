@@ -1,6 +1,7 @@
 package shiji_test
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"testing"
@@ -14,7 +15,7 @@ func TestGetCurrentBusinessDate(t *testing.T) {
 	req := client.NewGetCurrentBusinessDateRequest()
 	req.Headers().PropertyID = "c6a95ecb-be35-4619-875b-cae5d0df5fd2"
 
-	resp, err := req.Do()
+	resp, err := req.Do(context.Background())
 	if err != nil {
 		t.Error(err)
 	}

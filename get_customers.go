@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -125,9 +126,9 @@ func (r *GetCustomersRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetCustomersRequest) Do() (GetCustomersResponseBody, error) {
+func (r *GetCustomersRequest) Do(ctx context.Context) (GetCustomersResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}
@@ -143,10 +144,10 @@ func (r *GetCustomersRequest) Do() (GetCustomersResponseBody, error) {
 	return *responseBody, err
 }
 
-func (r *GetCustomersRequest) All() ([]Customer, error) {
+func (r *GetCustomersRequest) All(ctx context.Context) ([]Customer, error) {
 	customers := []Customer{}
 	for {
-		resp, err := r.Do()
+		resp, err := r.Do(ctx)
 		if err != nil {
 			return customers, err
 		}

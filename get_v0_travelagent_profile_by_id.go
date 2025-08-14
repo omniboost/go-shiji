@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -126,9 +127,9 @@ func (r *GetV0TravelAgentProfileByIDRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetV0TravelAgentProfileByIDRequest) Do() (GetV0TravelAgentProfileByIDResponseBody, error) {
+func (r *GetV0TravelAgentProfileByIDRequest) Do(ctx context.Context) (GetV0TravelAgentProfileByIDResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}

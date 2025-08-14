@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -129,9 +130,9 @@ func (r *GetTransactionSubGroupsRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetTransactionSubGroupsRequest) Do() (GetTransactionSubGroupsResponseBody, error) {
+func (r *GetTransactionSubGroupsRequest) Do(ctx context.Context) (GetTransactionSubGroupsResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}
@@ -156,10 +157,10 @@ func (r *GetTransactionSubGroupsRequest) Do() (GetTransactionSubGroupsResponseBo
 	return *responseBody, err
 }
 
-func (r *GetTransactionSubGroupsRequest) All() ([]TransactionSubGroup, error) {
+func (r *GetTransactionSubGroupsRequest) All(ctx context.Context) ([]TransactionSubGroup, error) {
 	transactionSubGroups := []TransactionSubGroup{}
 	for {
-		resp, err := r.Do()
+		resp, err := r.Do(ctx)
 		if err != nil {
 			return transactionSubGroups, err
 		}

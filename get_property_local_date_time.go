@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -125,9 +126,9 @@ func (r *GetPropertyLocalDateTimeRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetPropertyLocalDateTimeRequest) Do() (GetPropertyLocalDateTimeResponseBody, error) {
+func (r *GetPropertyLocalDateTimeRequest) Do(ctx context.Context) (GetPropertyLocalDateTimeResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}

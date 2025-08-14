@@ -1,6 +1,7 @@
 package shiji_test
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"testing"
@@ -16,7 +17,7 @@ func TestGetTravelAgentProfileByID(t *testing.T) {
 	req.PathParams().ID = "28d2ed1f-5dcf-4783-b4da-3dbebad08d3e"
 	// req.QueryParams().Extend = []string{"LocalExternalAccountReceivable"}
 
-	resp, err := req.Do()
+	resp, err := req.Do(context.Background())
 	if err != nil {
 		t.Error(err)
 	}

@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -120,9 +121,9 @@ func (r *GetPropertyByIDRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetPropertyByIDRequest) Do() (GetPropertyByIDResponseBody, error) {
+func (r *GetPropertyByIDRequest) Do(ctx context.Context) (GetPropertyByIDResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}

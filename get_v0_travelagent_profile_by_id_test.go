@@ -1,6 +1,7 @@
 package shiji_test
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"testing"
@@ -17,7 +18,7 @@ func TestGetV0TravelAgentProfileByID(t *testing.T) {
 	req.PathParams().ID = "d65615a6-1120-4f5e-876f-c7c5c2340c91"
 	req.QueryParams().Extend = shiji.CommaSeparatedQueryParam{"LocalExternalAccountReceivable"}
 
-	resp, err := req.Do()
+	resp, err := req.Do(context.Background())
 	if err != nil {
 		t.Error(err)
 	}

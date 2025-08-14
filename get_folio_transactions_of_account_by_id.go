@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -132,9 +133,9 @@ func (r *GetFolioTransactionsOfAccountByIDRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetFolioTransactionsOfAccountByIDRequest) Do() (GetFolioTransactionsOfAccountByIDResponseBody, error) {
+func (r *GetFolioTransactionsOfAccountByIDRequest) Do(ctx context.Context) (GetFolioTransactionsOfAccountByIDResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}
@@ -159,14 +160,14 @@ func (r *GetFolioTransactionsOfAccountByIDRequest) Do() (GetFolioTransactionsOfA
 	return *responseBody, err
 }
 
-func (r *GetFolioTransactionsOfAccountByIDRequest) All() ([]FolioTransaction, error) {
+func (r *GetFolioTransactionsOfAccountByIDRequest) All(ctx context.Context) ([]FolioTransaction, error) {
 	transactions := []FolioTransaction{}
 
 	// Set the page number to 1
 	r.QueryParams().PageNumber = 1
 
 	for {
-		resp, err := r.Do()
+		resp, err := r.Do(ctx)
 		if err != nil {
 			return transactions, err
 		}

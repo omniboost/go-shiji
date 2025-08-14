@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -114,9 +115,9 @@ func (r *GetUsersMeUnitsRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetUsersMeUnitsRequest) Do() (GetUsersMeUnitsResponseBody, error) {
+func (r *GetUsersMeUnitsRequest) Do(ctx context.Context) (GetUsersMeUnitsResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}
@@ -132,10 +133,10 @@ func (r *GetUsersMeUnitsRequest) Do() (GetUsersMeUnitsResponseBody, error) {
 	return *responseBody, err
 }
 
-func (r *GetUsersMeUnitsRequest) All() ([]UnitAssignmentListItem, error) {
+func (r *GetUsersMeUnitsRequest) All(ctx context.Context) ([]UnitAssignmentListItem, error) {
 	units := []UnitAssignmentListItem{}
 	for {
-		resp, err := r.Do()
+		resp, err := r.Do(ctx)
 		if err != nil {
 			return units, err
 		}

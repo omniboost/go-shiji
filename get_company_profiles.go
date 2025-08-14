@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -128,9 +129,9 @@ func (r *GetCompanyProfilesRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetCompanyProfilesRequest) Do() (GetCompanyProfilesResponseBody, error) {
+func (r *GetCompanyProfilesRequest) Do(ctx context.Context) (GetCompanyProfilesResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}
@@ -149,10 +150,10 @@ func (r *GetCompanyProfilesRequest) Do() (GetCompanyProfilesResponseBody, error)
 	return *responseBody, err
 }
 
-func (r *GetCompanyProfilesRequest) All() ([]CompanyProfile, error) {
+func (r *GetCompanyProfilesRequest) All(ctx context.Context) ([]CompanyProfile, error) {
 	companies := []CompanyProfile{}
 	for {
-		resp, err := r.Do()
+		resp, err := r.Do(ctx)
 		if err != nil {
 			return companies, err
 		}

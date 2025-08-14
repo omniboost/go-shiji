@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -31,7 +32,7 @@ func (c *Client) NewGetCompanyProfileByIDQueryParams() *GetCompanyProfileByIDQue
 	return &GetCompanyProfileByIDQueryParams{}
 }
 
-type GetCompanyProfileByIDQueryParams struct{
+type GetCompanyProfileByIDQueryParams struct {
 	Extend CommaSeparatedQueryParam `schema:"extend,omitempty"`
 }
 
@@ -126,9 +127,9 @@ func (r *GetCompanyProfileByIDRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetCompanyProfileByIDRequest) Do() (GetCompanyProfileByIDResponseBody, error) {
+func (r *GetCompanyProfileByIDRequest) Do(ctx context.Context) (GetCompanyProfileByIDResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}

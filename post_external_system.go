@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -120,9 +121,9 @@ func (r *PostExternalSystemRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *PostExternalSystemRequest) Do() (PostExternalSystemResponseBody, error) {
+func (r *PostExternalSystemRequest) Do(ctx context.Context) (PostExternalSystemResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}

@@ -1,6 +1,7 @@
 package shiji_test
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"testing"
@@ -16,7 +17,7 @@ func TestGetTransactions(t *testing.T) {
 	req := client.NewGetTransactionsRequest()
 	req.Headers().PropertyID = "c6a95ecb-be35-4619-875b-cae5d0df5fd2"
 
-	resp, err := req.Do()
+	resp, err := req.Do(context.Background())
 	if err != nil {
 		t.Error(err)
 	}
@@ -41,7 +42,7 @@ func TestGetTransactionsAll(t *testing.T) {
 		2024, 11, 2, 0, 0, 0, 0, time.UTC,
 	)}
 
-	resp, err := req.All()
+	resp, err := req.All(context.Background())
 	if err != nil {
 		t.Error(err)
 	}

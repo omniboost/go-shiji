@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -124,9 +125,9 @@ func (r *GetPropertyLinkedZonesRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetPropertyLinkedZonesRequest) Do() (GetPropertyLinkedZonesResponseBody, error) {
+func (r *GetPropertyLinkedZonesRequest) Do(ctx context.Context) (GetPropertyLinkedZonesResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}

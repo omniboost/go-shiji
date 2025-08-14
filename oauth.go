@@ -42,10 +42,7 @@ func (c *Oauth2Config) SetBaseURL(baseURL *url.URL) {
 	// Strip trailing slash
 	baseURL.Path = strings.TrimSuffix(baseURL.Path, "/")
 
-	// These are not registered in the oauth library by default
-	oauth2.RegisterBrokenAuthHeaderProvider(baseURL.String())
-
-	c.Config.Endpoint = oauth2.Endpoint{
+	c.Endpoint = oauth2.Endpoint{
 		AuthURL:  baseURL.String() + "/oauth",
 		TokenURL: baseURL.String() + "/access_token",
 	}
@@ -78,7 +75,7 @@ func (c *Oauth2PasswordConfig) SetBaseURL(baseURL *url.URL) {
 	// Strip trailing slash
 	baseURL.Path = strings.TrimSuffix(baseURL.Path, "/")
 
-	c.Config.Endpoint = oauth2.Endpoint{
+	c.Endpoint = oauth2.Endpoint{
 		AuthURL:  baseURL.String() + "/oauth",
 		TokenURL: baseURL.String() + "/access_token",
 	}

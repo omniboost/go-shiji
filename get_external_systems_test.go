@@ -1,6 +1,7 @@
 package shiji_test
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"testing"
@@ -14,7 +15,7 @@ func TestGetExternalSystems(t *testing.T) {
 	req := client.NewGetExternalSystemsRequest()
 	req.Headers().PropertyID = "806c52a0-753d-4a03-a4ad-0d5b577a11dc"
 
-	resp, err := req.Do()
+	resp, err := req.Do(context.Background())
 	if err != nil {
 		t.Error(err)
 	}
@@ -29,7 +30,7 @@ func TestGetExternalSystemsAll(t *testing.T) {
 	req := client.NewGetExternalSystemsRequest()
 	req.Headers().PropertyID = "806c52a0-753d-4a03-a4ad-0d5b577a11dc"
 
-	resp, err := req.All()
+	resp, err := req.All(context.Background())
 	if err != nil {
 		t.Error(err)
 	}

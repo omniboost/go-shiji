@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -127,9 +128,9 @@ func (r *PatchIndividualProfileByIDRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *PatchIndividualProfileByIDRequest) Do() (PatchIndividualProfileByIDResponseBody, error) {
+func (r *PatchIndividualProfileByIDRequest) Do(ctx context.Context) (PatchIndividualProfileByIDResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}

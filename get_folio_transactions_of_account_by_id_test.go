@@ -1,6 +1,7 @@
 package shiji_test
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"testing"
@@ -16,7 +17,7 @@ func TestGetFolioTransactionsOfAccountByID(t *testing.T) {
 	req.PathParams().AccountID = "167b3e65-145d-429d-a158-d5d3e731d0b5"
 	req.PathParams().FolioID = "85f26777-53f6-49b6-89ce-56b3a4523e26"
 
-	resp, err := req.Do()
+	resp, err := req.Do(context.Background())
 	if err != nil {
 		t.Error(err)
 	}
@@ -33,7 +34,7 @@ func TestGetFolioTransactionsOfAccountByIDAll(t *testing.T) {
 	req.PathParams().AccountID = "167b3e65-145d-429d-a158-d5d3e731d0b5"
 	req.PathParams().FolioID = "85f26777-53f6-49b6-89ce-56b3a4523e26"
 
-	resp, err := req.All()
+	resp, err := req.All(context.Background())
 	if err != nil {
 		t.Error(err)
 	}

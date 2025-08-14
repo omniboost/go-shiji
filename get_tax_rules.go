@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -130,9 +131,9 @@ func (r *GetTaxRulesRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetTaxRulesRequest) Do() (GetTaxRulesResponseBody, error) {
+func (r *GetTaxRulesRequest) Do(ctx context.Context) (GetTaxRulesResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}
@@ -161,10 +162,10 @@ func (r *GetTaxRulesRequest) Do() (GetTaxRulesResponseBody, error) {
 	return *responseBody, err
 }
 
-func (r *GetTaxRulesRequest) All() ([]TaxRule, error) {
+func (r *GetTaxRulesRequest) All(ctx context.Context) ([]TaxRule, error) {
 	taxRules := []TaxRule{}
 	for {
-		resp, err := r.Do()
+		resp, err := r.Do(ctx)
 		if err != nil {
 			return taxRules, err
 		}

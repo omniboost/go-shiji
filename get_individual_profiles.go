@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -129,9 +130,9 @@ func (r *GetIndividualProfilesRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetIndividualProfilesRequest) Do() (GetIndividualProfilesResponseBody, error) {
+func (r *GetIndividualProfilesRequest) Do(ctx context.Context) (GetIndividualProfilesResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}
@@ -150,10 +151,10 @@ func (r *GetIndividualProfilesRequest) Do() (GetIndividualProfilesResponseBody, 
 	return *responseBody, err
 }
 
-func (r *GetIndividualProfilesRequest) All() ([]IndividualProfile, error) {
+func (r *GetIndividualProfilesRequest) All(ctx context.Context) ([]IndividualProfile, error) {
 	individuals := []IndividualProfile{}
 	for {
-		resp, err := r.Do()
+		resp, err := r.Do(ctx)
 		if err != nil {
 			return individuals, err
 		}

@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -127,9 +128,9 @@ func (r *GetFolioOfAccountByIDRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetFolioOfAccountByIDRequest) Do() (GetFolioOfAccountByIDResponseBody, error) {
+func (r *GetFolioOfAccountByIDRequest) Do(ctx context.Context) (GetFolioOfAccountByIDResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}

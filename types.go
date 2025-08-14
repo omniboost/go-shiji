@@ -77,7 +77,7 @@ type PropertyListItem struct {
 		City         string `json:"city"`
 		PostalCode   string `json:"postalCode"`
 		StateCode    string `json:"stateCode"`
-		StateName    string `json::"stateName"`
+		StateName    string `json:"stateName"`
 		CountryCode  string `json:"countryCode"`
 		CountryName  string `json:"countryName"`
 	} `json:"businessAddress"`

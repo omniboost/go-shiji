@@ -1,6 +1,7 @@
 package shiji
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -129,9 +130,9 @@ func (r *GetAccountGroupsRequest) URL() *url.URL {
 	return &u
 }
 
-func (r *GetAccountGroupsRequest) Do() (GetAccountGroupsResponseBody, error) {
+func (r *GetAccountGroupsRequest) Do(ctx context.Context) (GetAccountGroupsResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r)
+	req, err := r.client.NewRequest(ctx, r)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}
@@ -156,10 +157,10 @@ func (r *GetAccountGroupsRequest) Do() (GetAccountGroupsResponseBody, error) {
 	return *responseBody, err
 }
 
-func (r *GetAccountGroupsRequest) All() ([]AccountGroup, error) {
+func (r *GetAccountGroupsRequest) All(ctx context.Context) ([]AccountGroup, error) {
 	accountGroups := []AccountGroup{}
 	for {
-		resp, err := r.Do()
+		resp, err := r.Do(ctx)
 		if err != nil {
 			return accountGroups, err
 		}
