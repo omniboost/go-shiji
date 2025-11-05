@@ -1650,6 +1650,12 @@ type Transaction struct {
 
 type Transactions []Transaction
 
+type PDFResponseBody struct {
+	Content     []byte
+	ContentType string
+	FileName    string
+}
+
 type CashieringAccount struct {
 	ID                    string `json:"id"`
 	Version               int64  `json:"version"`

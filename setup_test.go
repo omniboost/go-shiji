@@ -42,7 +42,7 @@ func client() *shiji.Client {
 		if err != nil {
 			log.Fatal(err)
 		}
-    	client.SetBaseURL(*u)
+		client.SetBaseURL(*u)
 	}
 	return client
 }
